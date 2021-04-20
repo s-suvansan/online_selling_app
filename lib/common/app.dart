@@ -59,7 +59,6 @@ class App {
     try {
       DateTime _time = time.toDate();
 
-      /* DateTime _time = time.toDate();
       if (_time.day == _now.day && _time.month == _now.month && _time.year == _now.year) {
         if (_time.hour == _now.hour && _time.minute == _now.minute && _time.second > _now.second) {
           _value = "just now";
@@ -78,7 +77,7 @@ class App {
             _value = "${_now.month - _time.month} ${(_now.month - _time.month) > 1 ? "months" : "month"} ago";
           }
         }
-      } */
+      }
     } catch (e) {
       _value = "";
     }
