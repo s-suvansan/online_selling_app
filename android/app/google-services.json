@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1043651431455",
+    "project_id": "nirojan-onlineshop",
+    "storage_bucket": "nirojan-onlineshop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043651431455:android:f684974b8a04f2d273d92a",
+        "android_client_info": {
+          "package_name": "com.example.online_shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043651431455-9jtgmruau8cl49kd8av30c4ejalh3aai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3oeJBTRuQF0OxtblJnny-SMSwAX2jh20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043651431455-9jtgmruau8cl49kd8av30c4ejalh3aai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
