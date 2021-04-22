@@ -4,9 +4,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.nonReactive(
-      builder: (context, model, child) => Container(
-        child: _ProductGridView() /* Center(child: BrandTexts.header(text: "Home")) */,
-      ),
+      builder: (context, model, child) => _ProductGridView(),
       viewModelBuilder: () => HomeViewModel(),
     );
   }
@@ -14,34 +12,56 @@ class HomeView extends StatelessWidget {
 
 // grid view
 class _ProductGridView extends ViewModelWidget<HomeViewModel> {
+  _ProductGridView({Key key}) : super(key: key, reactive: false);
+
   @override
   Widget build(BuildContext context, HomeViewModel model) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: FireStoreService.getProducts(),
-        builder: (context, snapshot) {
-          model.getProductDetails(snapshot);
-          return Container(
-            margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24.0),
-                topRight: Radius.circular(24.0),
+    return Container(
+      child: StreamBuilder<QuerySnapshot>(
+          stream: FireStoreService.getProducts(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  "No Data",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            }
+
+            if (snapshot.data == null || !snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            model.getProductDetails(snapshot);
+            return Container(
+              margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24.0),
+                  topRight: Radius.circular(24.0),
+                ),
               ),
-            ),
-            child: StaggeredGridView.countBuilder(
-              physics: BouncingScrollPhysics(),
-              crossAxisCount: 2,
-              itemCount: model.product.length,
-              itemBuilder: (context, index) => _ProductGridTile(
-                key: UniqueKey(),
-                index: index,
+              child: StaggeredGridView.countBuilder(
+                physics: BouncingScrollPhysics(),
+                crossAxisCount: 2,
+                itemCount: model.product.length,
+                itemBuilder: (context, index) => _ProductGridTile(
+                  key: UniqueKey(),
+                  index: index,
+                ),
+                staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.6),
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
               ),
-              staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.6),
-              crossAxisSpacing: 8.0,
-              mainAxisSpacing: 8.0,
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }
 

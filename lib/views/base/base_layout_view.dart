@@ -10,6 +10,7 @@ class BaseLayoutView extends StatelessWidget {
               body: _BodyPart(),
               bottomNavigationBar: _BottomBar(),
             ),
+        onModelReady: (model) => model.onInit(),
         viewModelBuilder: () => BaseLayoutViewModel());
   }
 }
@@ -47,7 +48,7 @@ class _AppBar extends ViewModelWidget<BaseLayoutViewModel> implements PreferredS
 
 // body part
 class _BodyPart extends ViewModelWidget<BaseLayoutViewModel> {
-  _BodyPart({Key key}) : super(key: key, reactive: true);
+  _BodyPart({Key key}) : super(key: key, reactive: false);
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
     return Container(
@@ -60,12 +61,20 @@ class _BodyPart extends ViewModelWidget<BaseLayoutViewModel> {
       ),
       child: PageView(
         physics: NeverScrollableScrollPhysics(),
+        pageSnapping: true,
         controller: model.pageController,
         children: <Widget>[
           HomeView(),
           BookmarkView(),
         ],
       ),
+      /* child: IndexedStack(
+        index: model.lastIndex,
+        children: [
+          HomeView(),
+          BookmarkView(),
+        ],
+      ), */
     );
   }
 }
@@ -86,7 +95,7 @@ class _BottomBar extends ViewModelWidget<BaseLayoutViewModel> {
       unselectedFontSize: 12.0,
       selectedItemColor: BrandColors.brandColorDark,
       elevation: 10.0,
-      // type: BottomNavigationBarType.fixed,
+      // type: BottomNavigationBarType.shifting,
       // fixedColor: BrandColors.brandColorDark,
       items: model.bottomTaps.map((taps) {
         return BottomNavigationBarItem(

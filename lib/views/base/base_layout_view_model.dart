@@ -16,7 +16,23 @@ class BaseLayoutViewModel extends BaseViewModel {
   //getter
   PageController get pageController => _pageController;
   int get currentIndex => _currentIndex;
+  int get lastIndex => _lastIndex;
   List<BottomTaps> get bottomTaps => _bottomTaps;
+
+  // on init function
+  void onInit() {
+    print("check");
+    FireAuthService.checkUser().then((value) {
+      if (value.isLogin) {
+        print("user available");
+        Global.userInfo = value.user;
+      } else {
+        FireAuthService.createUser().then((user) {
+          Global.userInfo = user;
+        });
+      }
+    });
+  }
 
   // for select taps in bottom bar
   void selectTaps(int index, {BuildContext context}) {
@@ -40,14 +56,6 @@ class BaseLayoutViewModel extends BaseViewModel {
 
   // show setting bottom sheet
   void showSettings(BuildContext context) {
-    // FireAuthService.checkUser().then((value) {
-    //   if (value) {
-    //     print("user available");
-    //   } else {
-    //     FireAuthService.createUser();
-    //   }
-    // });
-
     showCupertinoDialog(
       context: context,
       builder: (ctx) => SettingView(),

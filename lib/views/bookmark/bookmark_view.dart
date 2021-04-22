@@ -11,7 +11,7 @@ class BookmarkView extends StatelessWidget {
 }
 
 class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
-  _FavouriteList({Key key}) : super(key: key, reactive: true);
+  _FavouriteList({Key key}) : super(key: key, reactive: false);
 
   @override
   Widget build(BuildContext context, BookmarkViewModel model) {
@@ -132,7 +132,7 @@ class _FavouriteListTile extends ViewModelWidget<BookmarkViewModel> {
                       color: BrandColors.dark,
                     ),
                     BrandTexts.caption(
-                      text: "9 hr",
+                      text: "${App.getTime(model.product[index].postAt)}",
                       color: BrandColors.dark,
                     ),
                   ],
