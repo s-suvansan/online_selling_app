@@ -51,9 +51,17 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                 physics: BouncingScrollPhysics(),
                 crossAxisCount: 2,
                 itemCount: model.product.length,
-                itemBuilder: (context, index) => _ProductGridTile(
-                  key: UniqueKey(),
-                  index: index,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => App.showBottomPopup(
+                      context,
+                      ProductInfoView(
+                        productModel: model.product[index],
+                      ),
+                      reduceHeightBy: 25.0),
+                  child: _ProductGridTile(
+                    key: UniqueKey(),
+                    index: index,
+                  ),
                 ),
                 staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.6),
                 crossAxisSpacing: 8.0,
@@ -99,7 +107,7 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
                   : NO_IMAGE,
             ),
           ),
-          /*   Positioned(
+          /* Positioned(
               height: 28.0,
               top: 8.0,
               right: 4.0,

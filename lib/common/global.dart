@@ -5,6 +5,8 @@ class Global {
 
   // firestore collection name
   static const String PRODUCTS = "products";
+  static const String POST_AT = "postAt";
+  static const String FAVOURITE_USER_IDS = "favouriteUserIds";
 
   //user details
   static FirebaseUser userInfo;

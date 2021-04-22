@@ -24,7 +24,7 @@ class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
         ),
       ),
       child: StreamBuilder<QuerySnapshot>(
-          stream: FireStoreService.getProducts(),
+          stream: FireStoreService.getFavouriteProducts(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(

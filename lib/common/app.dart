@@ -17,6 +17,11 @@ class App {
     return MediaQuery.of(context).size.width;
   }
 
+  // pop screen once
+  static void popOnce(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
   // get random string for message id
   static String getRandomString(int length) =>
       String.fromCharCodes(Iterable.generate(length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
@@ -188,6 +193,16 @@ class App {
       _value = "";
     }
     return _value;
+  }
+
+  // show bottom sheet
+  static void showBottomPopup(BuildContext context, Widget widget, {double reduceHeightBy = 0.0}) {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (BuildContext bc) {
+          return Container(height: getDeviceHight(context) - reduceHeightBy, child: widget);
+        });
   }
 }
 
