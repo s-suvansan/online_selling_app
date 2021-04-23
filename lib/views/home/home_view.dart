@@ -5,6 +5,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.nonReactive(
       builder: (context, model, child) => _ProductGridView(),
+      onModelReady: (model) => model.onInit(),
       viewModelBuilder: () => HomeViewModel(),
     );
   }
@@ -20,54 +21,44 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
       child: StreamBuilder<QuerySnapshot>(
           stream: FireStoreService.getProducts(),
           builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  "No Data",
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              );
-            }
-
-            if (snapshot.data == null || !snapshot.hasData) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
             model.getProductDetails(snapshot);
-            return Container(
-              margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24.0),
-                  topRight: Radius.circular(24.0),
-                ),
-              ),
-              child: StaggeredGridView.countBuilder(
-                physics: BouncingScrollPhysics(),
-                crossAxisCount: 2,
-                itemCount: model.product.length,
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => App.showBottomPopup(
-                      context,
-                      ProductInfoView(
-                        productModel: model.product[index],
+            return !model.isLoading
+                ? Container(
+                    margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24.0),
+                        topRight: Radius.circular(24.0),
                       ),
-                      reduceHeightBy: 25.0),
-                  child: _ProductGridTile(
-                    key: UniqueKey(),
-                    index: index,
-                  ),
-                ),
-                staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.6),
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-              ),
-            );
+                    ),
+                    child: StaggeredGridView.countBuilder(
+                      physics: BouncingScrollPhysics(),
+                      crossAxisCount: 2,
+                      itemCount: model.product.length,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () => App.showBottomPopup(
+                            context,
+                            ProductInfoView(
+                              productModel: model.product[index],
+                            ),
+                            reduceHeightBy: 25.0),
+                        child: _ProductGridTile(
+                          key: UniqueKey(),
+                          index: index,
+                        ),
+                      ),
+                      staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.6),
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                    ),
+                  )
+                : Center(
+                    child: Loading(
+                      needBg: true,
+                      size: 20.0,
+                      bgSize: 40.0,
+                    ),
+                  );
           }),
     );
   }

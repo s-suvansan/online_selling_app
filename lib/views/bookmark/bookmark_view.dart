@@ -3,8 +3,9 @@ import '../../main_index.dart';
 class BookmarkView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder.nonReactive(
+    return ViewModelBuilder<BookmarkViewModel>.nonReactive(
       builder: (context, model, child) => _FavouriteList(),
+      onModelReady: (model) => model.onInit(),
       viewModelBuilder: () => BookmarkViewModel(),
     );
   }
@@ -26,35 +27,26 @@ class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
       child: StreamBuilder<QuerySnapshot>(
           stream: FireStoreService.getFavouriteProducts(),
           builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  "No Data",
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              );
-            }
-
-            if (snapshot.data == null || !snapshot.hasData) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-
             model.getProductDetails(snapshot);
-            return ListView.separated(
-              physics: BouncingScrollPhysics(),
-              itemCount: model.product.length,
-              itemBuilder: (context, index) => _FavouriteListTile(
-                key: UniqueKey(),
-                index: index,
-              ),
-              separatorBuilder: (context, i) => SizedBox(height: 8.0),
-            );
+            return !model.isLoading
+                ? ListView.separated(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: model.product.length,
+                    itemBuilder: (context, index) => _FavouriteListTile(
+                      key: UniqueKey(),
+                      index: index,
+                    ),
+                    separatorBuilder: (context, i) => SizedBox(height: 8.0),
+                  )
+                : model.product.isEmpty
+                    ? Empty()
+                    : Center(
+                        child: Loading(
+                          needBg: true,
+                          size: 20.0,
+                          bgSize: 40.0,
+                        ),
+                      );
           }),
     );
   }
