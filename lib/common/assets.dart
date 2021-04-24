@@ -14,6 +14,6 @@ const NO_IMAGE =
     "https://static.wixstatic.com/media/b8f3ba_3c742db44f224c6d83ffb803e54c8851~mv2.jpg/v1/fill/w_460,h_460,al_c,q_80,usm_0.66_1.00_0.01/picture-not-available.webp";
 
 // gifs
-const EMPTY_HEART = 'assets/images/gifs/empty_anim.gif';
-const EMPTY_ASTRONUT = 'assets/images/gifs/astronut.gif';
-const SEACHING = 'assets/images/gifs/searching.gif';
+const EMPTY_HEART = 'assets/images/lottie/empty_heart.json';
+const EMPTY_ASTRONAUT = 'assets/images/lottie/empty_astronaut.json';
+// const SEACHING = 'assets/images/gifs/searching.gif';

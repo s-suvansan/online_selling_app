@@ -52,13 +52,18 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                       mainAxisSpacing: 8.0,
                     ),
                   )
-                : Center(
-                    child: Loading(
-                      needBg: true,
-                      size: 20.0,
-                      bgSize: 40.0,
-                    ),
-                  );
+                : model.product.isEmpty
+                    ? Empty(
+                        image: EMPTY_ASTRONAUT,
+                        text: "Empty product list.",
+                      )
+                    : Center(
+                        child: Loading(
+                          needBg: true,
+                          size: 20.0,
+                          bgSize: 40.0,
+                        ),
+                      );
           }),
     );
   }
