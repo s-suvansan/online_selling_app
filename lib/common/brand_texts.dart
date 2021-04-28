@@ -110,17 +110,14 @@ class BrandTexts {
     TextAlign textAlign,
     Color color,
     double fontSize = 14.0,
+    FontStyle fontStyle = FontStyle.normal,
   }) {
     return Text(
       text,
       maxLines: maxLines,
       overflow: overflow,
       textAlign: textAlign ?? TextAlign.start,
-      style: textStyle(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: bold,
-      ),
+      style: textStyle(color: color, fontSize: fontSize, fontWeight: bold, fontStyle: fontStyle),
     );
   }
 

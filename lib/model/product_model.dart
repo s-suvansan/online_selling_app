@@ -11,6 +11,7 @@ class ProductModel {
     this.postBy,
     this.postFrom,
     this.keywords,
+    this.isNegotiable,
   });
 
   String id;
@@ -22,6 +23,7 @@ class ProductModel {
   String postBy;
   String postFrom;
   List<String> keywords;
+  bool isNegotiable;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json["id"] ?? "",
@@ -33,6 +35,7 @@ class ProductModel {
         postBy: json["postBy"] ?? "",
         postFrom: json["postFrom"] ?? "",
         keywords: json["keywords"] != null ? List<String>.from(json["keywords"].map((x) => x)) : [],
+        isNegotiable: json["isNegotiable"] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
@@ -45,5 +48,6 @@ class ProductModel {
         "postBy": postBy,
         "postFrom": postFrom,
         "keywords": List<String>.from(keywords.map((x) => x)),
+        "isNegotiable": isNegotiable,
       };
 }

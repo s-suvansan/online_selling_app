@@ -29,7 +29,7 @@ class Empty extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100.0),
-              child: Lottie.asset(
+              child: Image.asset(
                 image ?? EMPTY_HEART,
                 width: size,
                 height: size,
