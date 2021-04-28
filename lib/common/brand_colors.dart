@@ -24,4 +24,9 @@ class BrandColors {
   static Color info = Color(0xFF5BC0DE); // info - #5bc0de
   static Color dangers = Color(0xFFD9534F); // dangers - #d9534f
 
+  // call and sms button color
+  static Color callColor = Colors.green[700];
+  static Color smsColor = Colors.blue[700];
+  static Color whatsappColor = Color(0xFF25D366); // dangers - #d9534f
+
 }

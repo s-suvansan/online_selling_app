@@ -29,24 +29,28 @@ class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
           builder: (context, snapshot) {
             model.getProductDetails(snapshot);
             return !model.isLoading
-                ? ListView.separated(
-                    physics: BouncingScrollPhysics(),
-                    itemCount: model.product.length,
-                    itemBuilder: (context, index) => _FavouriteListTile(
-                      key: UniqueKey(),
-                      index: index,
-                    ),
-                    separatorBuilder: (context, i) => SizedBox(height: 8.0),
-                  )
-                : model.product.isEmpty
-                    ? Empty()
-                    : Center(
-                        child: Loading(
-                          needBg: true,
-                          size: 20.0,
-                          bgSize: 40.0,
+                ? model.product.isNotEmpty
+                    ? ListView.separated(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: model.product.length,
+                        itemBuilder: (context, index) => _FavouriteListTile(
+                          key: UniqueKey(),
+                          index: index,
                         ),
-                      );
+                        separatorBuilder: (context, i) => SizedBox(height: 8.0),
+                      )
+                    : Empty(
+                        image: EMPTY_ASTRONAUT,
+                        size: 150.0,
+                        moveFromTopBy: 180.0,
+                      )
+                : Center(
+                    child: Loading(
+                      needBg: true,
+                      size: 20.0,
+                      bgSize: 40.0,
+                    ),
+                  );
           }),
     );
   }

@@ -9,6 +9,9 @@ const LIKE_FILL = "assets/images/svgs/like_fill.svg";
 const GEAR_FILL = "assets/images/svgs/gear_fill.svg";
 const LEFT_ARROW_SVG = 'assets/images/svgs/left-arrow.svg';
 const PRICE_TAG = 'assets/images/svgs/tag.svg';
+const CALL = 'assets/images/svgs/call.svg';
+const SMS = 'assets/images/svgs/sms.svg';
+const WHATSAPP = 'assets/images/svgs/whatsapp.svg';
 
 //place holder image
 const NO_IMAGE =

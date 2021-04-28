@@ -204,6 +204,19 @@ class App {
           return Container(height: getDeviceHight(context) - reduceHeightBy, child: widget);
         });
   }
+
+  // url lancher
+  static Future<bool> urlLaunch({@required String url}) async {
+    bool value = await canLaunch(url);
+    if (value) {
+      launch(url);
+    } else {
+      print("Could not launch $url");
+    }
+    return value;
+  }
+
+  static void showToast({@required String msg, Color textColor, Color bgColor}) {}
 }
 
 enum DateTimeFormat {
@@ -221,18 +234,3 @@ enum TimeFormat {
   LocalTime, // 03:24:00 AM or PM
   StandardTime, // 15:24:00
 }
-
-/* extension DateTimeFormatExtenstion on DateTimeFormat {
-  int get code {
-    switch (this) {
-      case DateTimeFormat.Date:
-        return 1;
-      case DateTimeFormat.Time:
-        return 2;
-      case DateTimeFormat.DateAndTime:
-        return 3;
-      default:
-        return 1;
-    }
-  }
-} */

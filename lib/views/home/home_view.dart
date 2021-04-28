@@ -23,47 +23,49 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
           builder: (context, snapshot) {
             model.getProductDetails(snapshot);
             return !model.isLoading
-                ? Container(
-                    margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(24.0),
-                        topRight: Radius.circular(24.0),
-                      ),
-                    ),
-                    child: StaggeredGridView.countBuilder(
-                      physics: BouncingScrollPhysics(),
-                      crossAxisCount: 2,
-                      itemCount: model.product.length,
-                      itemBuilder: (context, index) => GestureDetector(
-                        onTap: () => App.showBottomPopup(
-                            context,
-                            ProductInfoView(
-                              productModel: model.product[index],
-                            ),
-                            reduceHeightBy: 25.0),
-                        child: _ProductGridTile(
-                          key: UniqueKey(),
-                          index: index,
+                ? model.product.isNotEmpty
+                    ? Container(
+                        margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(24.0),
+                            topRight: Radius.circular(24.0),
+                          ),
                         ),
-                      ),
-                      staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.6),
-                      crossAxisSpacing: 8.0,
-                      mainAxisSpacing: 8.0,
-                    ),
-                  )
-                : model.product.isEmpty
-                    ? Empty(
+                        child: StaggeredGridView.countBuilder(
+                          physics: BouncingScrollPhysics(),
+                          crossAxisCount: 2,
+                          itemCount: model.product.length,
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () => App.showBottomPopup(
+                                context,
+                                ProductInfoView(
+                                  productModel: model.product[index],
+                                ),
+                                reduceHeightBy: 25.0),
+                            child: _ProductGridTile(
+                              key: UniqueKey(),
+                              index: index,
+                            ),
+                          ),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.6),
+                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 8.0,
+                        ),
+                      )
+                    : Empty(
                         image: EMPTY_ASTRONAUT,
                         text: "Empty product list.",
+                        size: 150.0,
+                        moveFromTopBy: 180.0,
                       )
-                    : Center(
-                        child: Loading(
-                          needBg: true,
-                          size: 20.0,
-                          bgSize: 40.0,
-                        ),
-                      );
+                : Center(
+                    child: Loading(
+                      needBg: true,
+                      size: 20.0,
+                      bgSize: 40.0,
+                    ),
+                  );
           }),
     );
   }

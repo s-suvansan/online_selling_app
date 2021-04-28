@@ -20,7 +20,7 @@ class BookmarkViewModel extends BaseViewModel {
     if (snapshot.hasData && snapshot.data.documents.length > 0) {
       _product = List<ProductModel>.from(snapshot.data.documents.map((x) => ProductModel.fromJson(x.data)));
       // notifyListeners();
-      _isLoading = false;
     }
+    _isLoading = false;
   }
 }

@@ -22,6 +22,7 @@ class ProductInfoView extends StatelessWidget {
             ],
           ),
         ),
+        bottomNavigationBar: _BottomCallButton(),
       ),
       onModelReady: (model) => model.onInit(productModel),
       viewModelBuilder: () => ProductInfoViewModel(),
@@ -40,6 +41,7 @@ class _TopImagesView extends ViewModelWidget<ProductInfoViewModel> {
           children: [
             PageView.builder(
               physics: BouncingScrollPhysics(),
+              controller: model.pageController,
               itemCount: model.product.imageUrl?.length,
               itemBuilder: (context, index) {
                 return Image.network(
@@ -47,52 +49,86 @@ class _TopImagesView extends ViewModelWidget<ProductInfoViewModel> {
                   fit: BoxFit.contain,
                 );
               },
+              onPageChanged: (currentIndex) => model.onImageChange(index: currentIndex),
             ),
-            Positioned(
-              top: 0,
-              bottom: 0,
-              child: Container(
-                height: 40.0,
-                width: 20.0,
-                decoration: BoxDecoration(
-                    color: BrandColors.light,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20.0),
-                      bottomRight: Radius.circular(20.0),
-                    )),
-                child: Icon(
-                  Icons.arrow_back_ios_rounded,
-                  size: 20.0,
-                  color: BrandColors.shadow,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                onTap: () => model.onArrowClick(isForward: false),
+                child: Container(
+                  height: 40.0,
+                  width: 25.0,
+                  padding: EdgeInsets.only(right: 6.0),
+                  decoration: BoxDecoration(
+                      color: BrandColors.light,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20.0),
+                        bottomRight: Radius.circular(20.0),
+                      )),
+                  child: Icon(
+                    Icons.arrow_back_ios_rounded,
+                    size: 18.0,
+                    color: BrandColors.shadow,
+                  ),
                 ),
               ),
             ),
-            Positioned(
-              right: 0,
-              top: 0,
-              bottom: 0,
-              child: Container(
-                height: 40.0,
-                width: 20.0,
-                decoration: BoxDecoration(
-                    color: BrandColors.light,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      bottomLeft: Radius.circular(20.0),
-                    )),
-                child: Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  size: 20.0,
-                  color: BrandColors.shadow,
+            Align(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onTap: () => model.onArrowClick(),
+                child: Container(
+                  height: 40.0,
+                  width: 25.0,
+                  padding: EdgeInsets.only(left: 6.0),
+                  decoration: BoxDecoration(
+                      color: BrandColors.light,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        bottomLeft: Radius.circular(20.0),
+                      )),
+                  child: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 18.0,
+                    color: BrandColors.shadow,
+                  ),
                 ),
               ),
-            )
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                  decoration: BoxDecoration(
+                    color: BrandColors.dark.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  alignment: Alignment.center,
+                  width: 80.0,
+                  height: 20.0,
+                  child: ListView.separated(
+                    physics: ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: model.product.imageUrl.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, dotIndex) => Container(
+                      height: 10.0,
+                      width: 10.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: dotIndex == model.currentImageIndex ? BrandColors.brandColorLight : BrandColors.light,
+                      ),
+                    ),
+                    separatorBuilder: (context, i) => SizedBox(width: 4.0),
+                  )),
+            ),
           ],
         ));
   }
 }
 
+// content view
 class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
+  const _ContentView({Key key}) : super(key: key, reactive: false);
   @override
   Widget build(BuildContext context, ProductInfoViewModel model) {
     return Container(
@@ -158,68 +194,126 @@ class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
           SizedBox(height: 8.0),
           Divider(height: 0.0, color: BrandColors.shadowDark),
           SizedBox(height: 16.0),
-          if (model.product.desc != "")
-            LayoutBuilder(builder: (context, size) {
-              // for find the maxline of desc
-              final span = TextSpan(text: model.product.desc);
-              final tp = TextPainter(text: span, maxLines: 5, textDirection: TextDirection.ltr);
-              tp.layout(maxWidth: size.maxWidth);
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BrandTexts.titleBold(
-                    text: "Description",
-                    color: BrandColors.dark,
-                  ),
-                  SizedBox(height: 8.0),
-                  //description
-                  BrandTexts.titleBold(
-                    text: "${model.product.desc} ",
-                    color: BrandColors.shadowDark,
-                    textAlign: TextAlign.justify,
-                    maxLines: model.showMore ? 100 : 5,
-                  ),
-                  SizedBox(height: 8.0),
-                  // show more and show less button
-                  if (tp.didExceedMaxLines)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        InkWell(
-                          onTap: () => model.showMoreDesc(),
-                          child: Container(
-                            padding: EdgeInsets.only(right: 8.0, left: 2.0),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: BrandColors.shadowLight,
-                              borderRadius: BorderRadius.circular(16.0),
-                              border: Border.all(
-                                color: BrandColors.shadow,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  model.showMore ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                                  color: BrandColors.shadow,
-                                  size: 26.0,
-                                ),
-                                BrandTexts.subTitleBold(
-                                  text: model.showMore ? "Show less" : "Show more",
-                                  color: BrandColors.shadow,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                ],
-              );
-            }),
+          if (model.product.desc != "") _DescView(),
         ],
       ),
+    );
+  }
+}
+
+// desc
+class _DescView extends ViewModelWidget<ProductInfoViewModel> {
+  @override
+  Widget build(BuildContext context, ProductInfoViewModel model) {
+    return LayoutBuilder(builder: (context, size) {
+      // for find the maxline of desc
+      final span = TextSpan(text: model.product.desc);
+      final tp = TextPainter(text: span, maxLines: 5, textDirection: TextDirection.ltr);
+      tp.layout(maxWidth: size.maxWidth);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BrandTexts.titleBold(
+            text: "Description",
+            color: BrandColors.dark,
+          ),
+          SizedBox(height: 8.0),
+          //description
+          BrandTexts.titleBold(
+            text: "${model.product.desc} ",
+            color: BrandColors.shadowDark,
+            textAlign: TextAlign.justify,
+            maxLines: model.showMore ? 100 : 5,
+          ),
+          SizedBox(height: 8.0),
+          // show more and show less button
+          if (tp.didExceedMaxLines)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () => model.showMoreDesc(),
+                  child: Container(
+                    padding: EdgeInsets.only(right: 8.0, left: 2.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: BrandColors.shadowLight,
+                      borderRadius: BorderRadius.circular(16.0),
+                      border: Border.all(
+                        color: BrandColors.shadow,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          model.showMore ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                          color: BrandColors.shadow,
+                          size: 26.0,
+                        ),
+                        BrandTexts.subTitleBold(
+                          text: model.showMore ? "Show less" : "Show more",
+                          color: BrandColors.shadow,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          SizedBox(height: 16.0),
+        ],
+      );
+    });
+  }
+}
+
+class _BottomCallButton extends ViewModelWidget<ProductInfoViewModel> {
+  const _BottomCallButton({Key key}) : super(key: key, reactive: false);
+
+  @override
+  Widget build(BuildContext context, ProductInfoViewModel model) {
+    return Row(
+      children: [
+        Expanded(
+          child: InkWell(
+            onTap: () => model.callAndSmsLauncher(phoneNumber: "0764019818"),
+            child: Container(
+              height: 50.0,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(color: BrandColors.callColor, borderRadius: BorderRadius.circular(5.0)),
+              margin: EdgeInsets.only(left: 16.0, right: 8.0, top: 8.0, bottom: 4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  App.svgImage(svg: CALL, height: 18.0, color: BrandColors.light),
+                  SizedBox(width: 8.0),
+                  BrandTexts.titleBold(text: "Call", color: BrandColors.light, fontSize: 18.0),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: InkWell(
+            onTap: () => model.callAndSmsLauncher(phoneNumber: "0764019818", isCall: false),
+            child: Container(
+              height: 50.0,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(color: BrandColors.whatsappColor, borderRadius: BorderRadius.circular(5.0)),
+              margin: EdgeInsets.only(left: 8.0, right: 16.0, top: 8.0, bottom: 4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  App.svgImage(svg: WHATSAPP, height: 20.0, color: BrandColors.light),
+                  SizedBox(width: 8.0),
+                  BrandTexts.titleBold(text: "WhatsApp", color: BrandColors.light, fontSize: 18.0),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
