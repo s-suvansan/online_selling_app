@@ -216,7 +216,32 @@ class App {
     return value;
   }
 
-  static void showToast({@required String msg, Color textColor, Color bgColor}) {}
+  // flush bar for info like snack bar
+  static void showInfoBar(BuildContext context, {@required String msg, String title, Color textColor, Color bgColor}) {
+    Flushbar(
+      titleText: title != null ? BrandTexts.titleBold(text: title, color: textColor ?? BrandColors.light) : SizedBox.shrink(),
+      messageText: BrandTexts.titleBold(text: msg, color: textColor ?? BrandColors.light),
+      backgroundColor: bgColor ?? BrandColors.shadow,
+      flushbarPosition: FlushbarPosition.TOP,
+      boxShadows: [
+        BoxShadow(
+          color: Colors.black45,
+          offset: Offset(3, 3),
+          blurRadius: 3,
+        ),
+      ],
+      mainButton: InkWell(
+        onTap: () => popOnce(context),
+        child: Icon(
+          Icons.close_rounded,
+          color: BrandColors.light,
+        ),
+      ),
+      animationDuration: Duration(milliseconds: 500),
+      flushbarStyle: FlushbarStyle.FLOATING,
+      duration: Duration(seconds: 10),
+    )..show(context);
+  }
 }
 
 enum DateTimeFormat {

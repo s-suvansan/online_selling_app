@@ -33,9 +33,17 @@ class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
                     ? ListView.separated(
                         physics: BouncingScrollPhysics(),
                         itemCount: model.product.length,
-                        itemBuilder: (context, index) => _FavouriteListTile(
-                          key: UniqueKey(),
-                          index: index,
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () => App.showBottomPopup(
+                              context,
+                              ProductInfoView(
+                                productModel: model.product[index],
+                              ),
+                              reduceHeightBy: 25.0),
+                          child: _FavouriteListTile(
+                            key: UniqueKey(),
+                            index: index,
+                          ),
                         ),
                         separatorBuilder: (context, i) => SizedBox(height: 8.0),
                       )
@@ -92,15 +100,6 @@ class _FavouriteListTile extends ViewModelWidget<BookmarkViewModel> {
               children: [
                 Row(
                   children: [
-                    InkWell(
-                      onTap: () {},
-                      child: App.svgImage(
-                        svg: LIKE_FILL,
-                        height: 20.0,
-                        color: BrandColors.brandColorLight,
-                      ),
-                    ),
-                    SizedBox(width: 8.0),
                     Expanded(
                       child: BrandTexts.commonText(
                         text: "${model.product[index].title}",

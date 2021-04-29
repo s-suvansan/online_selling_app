@@ -48,7 +48,7 @@ class ProductInfoViewModel extends BaseViewModel {
   }
 
   // launch call and sms
-  void callAndSmsLauncher({@required String phoneNumber, bool isCall = true}) {
+  void callAndSmsLauncher(BuildContext context, {@required String phoneNumber, bool isCall = true}) {
     String _url = "";
     if (phoneNumber != null && phoneNumber != "") {
       if (isCall) {
@@ -60,7 +60,11 @@ class ProductInfoViewModel extends BaseViewModel {
       App.urlLaunch(url: _url).then((value) {
         if (!value) {
           print("Could not launch $_url");
-          App.showToast(msg: "Could not launch");
+          App.showInfoBar(
+            context,
+            msg: "Could not launch",
+            bgColor: BrandColors.dangers,
+          );
         }
       });
     }

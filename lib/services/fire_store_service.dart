@@ -14,15 +14,16 @@ class FireStoreService {
   static Stream<QuerySnapshot> getFavouriteProducts() {
     _favouriteProducts = Firestore.instance.collection(Global.PRODUCTS);
     return _favouriteProducts
-        /*  .where(
-          Global.FAVOURITE_USER_IDS,
-          arrayContains: Global.userInfo.uid,
-        ) */
         .orderBy(Global.POST_AT, descending: true)
         .where(
           Global.FAVOURITE_USER_IDS,
           arrayContains: Global.userInfo.uid,
         )
         .snapshots(includeMetadataChanges: true);
+  }
+
+  // favourite product function
+  static void favouriteProduct({@required String docId}) {
+    // Firestore.instance.collection(Global.PRODUCTS).document(docId).updateData({"data": FieldValue.arrayUnion(obj)});
   }
 }

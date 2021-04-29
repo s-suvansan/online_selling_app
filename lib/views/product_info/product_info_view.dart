@@ -9,9 +9,7 @@ class ProductInfoView extends StatelessWidget {
     return ViewModelBuilder<ProductInfoViewModel>.nonReactive(
       builder: (context, model, child) => Scaffold(
         backgroundColor: BrandColors.light,
-        appBar: CommonAppBar(
-          title: "Product Info",
-        ),
+        appBar: _AppBar(),
         body: Container(
           child: ListView(
             physics: ClampingScrollPhysics(),
@@ -28,6 +26,23 @@ class ProductInfoView extends StatelessWidget {
       viewModelBuilder: () => ProductInfoViewModel(),
     );
   }
+}
+
+//app bar
+class _AppBar extends ViewModelWidget<ProductInfoViewModel> implements PreferredSizeWidget {
+  const _AppBar({Key key}) : super(key: key, reactive: false);
+  @override
+  Widget build(BuildContext context, ProductInfoViewModel viewModel) {
+    return CommonAppBar(
+      title: "Product Info",
+      isShowLike: true,
+      isLiked: false,
+      onLike: (isLiked) {},
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
 // top image view
@@ -277,7 +292,7 @@ class _BottomCallButton extends ViewModelWidget<ProductInfoViewModel> {
       children: [
         Expanded(
           child: InkWell(
-            onTap: () => model.callAndSmsLauncher(phoneNumber: "0764019818"),
+            onTap: () => model.callAndSmsLauncher(context, phoneNumber: "0764019818"),
             child: Container(
               height: 50.0,
               alignment: Alignment.center,
@@ -296,7 +311,7 @@ class _BottomCallButton extends ViewModelWidget<ProductInfoViewModel> {
         ),
         Expanded(
           child: InkWell(
-            onTap: () => model.callAndSmsLauncher(phoneNumber: "0764019818", isCall: false),
+            onTap: () => model.callAndSmsLauncher(context, phoneNumber: "0764019818", isCall: false),
             child: Container(
               height: 50.0,
               alignment: Alignment.center,
@@ -305,7 +320,7 @@ class _BottomCallButton extends ViewModelWidget<ProductInfoViewModel> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  App.svgImage(svg: WHATSAPP, height: 20.0, color: BrandColors.light),
+                  App.svgImage(svg: WHATSAPP, height: 22.0, color: BrandColors.light),
                   SizedBox(width: 8.0),
                   BrandTexts.titleBold(text: "WhatsApp", color: BrandColors.light, fontSize: 18.0),
                 ],
