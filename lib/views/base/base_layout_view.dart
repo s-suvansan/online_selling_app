@@ -58,12 +58,12 @@ class _BodyPart extends ViewModelWidget<BaseLayoutViewModel> {
     return Consumer<ThemeChange>(builder: (context, value, child) {
       return Container(
         decoration: BoxDecoration(
-          color: getIt<ThemeChange>().isDark ? BrandColors.dark4 : BrandColors.shadowLight.withOpacity(0.9),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(24.0),
-            topRight: Radius.circular(24.0),
-          ),
-        ),
+            color: getIt<ThemeChange>().isDark ? BrandColors.dark4 : BrandColors.shadowLight.withOpacity(0.9),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(24.0),
+              topRight: Radius.circular(24.0),
+            ),
+            image: DecorationImage(image: AssetImage(getIt<ThemeChange>().isDark ? DARK_BG : LIGHT_BG), fit: BoxFit.cover)),
         child: PageView(
           physics: NeverScrollableScrollPhysics(),
           pageSnapping: true,

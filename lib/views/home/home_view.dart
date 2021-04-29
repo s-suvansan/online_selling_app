@@ -54,7 +54,6 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                         ),
                       )
                     : Empty(
-                        image: EMPTY_ASTRONAUT,
                         text: "Empty product list.",
                         size: 150.0,
                         moveFromTopBy: 180.0,

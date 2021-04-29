@@ -11,3 +11,4 @@ export 'package:url_launcher/url_launcher.dart';
 export 'package:online_shop/packages/flushbar/flushbar.dart';
 export 'package:get_it/get_it.dart';
 export 'package:provider/provider.dart';
+export 'package:shared_preferences/shared_preferences.dart';

@@ -12,12 +12,18 @@ const PRICE_TAG = 'assets/images/svgs/tag.svg';
 const CALL = 'assets/images/svgs/call.svg';
 const SMS = 'assets/images/svgs/sms.svg';
 const WHATSAPP = 'assets/images/svgs/whatsapp.svg';
+const EMPTY_BOX = 'assets/images/svgs/empty_box.svg';
+const EMPTY_MAN = 'assets/images/svgs/empty_man.svg';
 
 //place holder image
 const NO_IMAGE =
     "https://static.wixstatic.com/media/b8f3ba_3c742db44f224c6d83ffb803e54c8851~mv2.jpg/v1/fill/w_460,h_460,al_c,q_80,usm_0.66_1.00_0.01/picture-not-available.webp";
 
-// gifs
+// pngs
 const EMPTY_HEART = 'assets/images/pngs/empty_heart.png';
 const EMPTY_ASTRONAUT = 'assets/images/pngs/empty_astronaut.png';
 // const SEACHING = 'assets/images/gifs/searching.gif';
+
+//jpgs
+const DARK_BG = 'assets/images/jpgs/dark_bg.jpg';
+const LIGHT_BG = 'assets/images/jpgs/light_bg.jpg';

@@ -17,7 +17,7 @@ class BookmarkViewModel extends BaseViewModel {
 
   // get product details
   void getProductDetails(AsyncSnapshot<QuerySnapshot> snapshot) {
-    if (snapshot.hasData && snapshot.data.documents.length > 0) {
+    if (snapshot.hasData && snapshot.data.documents.length >= 0) {
       _product = List<ProductModel>.from(snapshot.data.documents.map((x) => ProductModel.fromJson(x.data)));
       // notifyListeners();
     }
@@ -26,8 +26,6 @@ class BookmarkViewModel extends BaseViewModel {
 
   // open product info view
   void openProductInfo(BuildContext context, Widget widget) {
-    App.showBottomPopup(context, widget, reduceHeightBy: 25.0).then((value) {
-      notifyListeners();
-    });
+    App.showBottomPopup(context, widget, reduceHeightBy: 25.0);
   }
 }

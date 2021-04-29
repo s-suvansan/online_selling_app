@@ -1,11 +1,13 @@
 import 'main_index.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   setup();
+  getIt<ThemeChange>().setIsDark = await App.getIsDark();
   runApp(ChangeNotifierProvider(
     create: (_) => getIt<ThemeChange>(),
     child: Consumer<ThemeChange>(
-      builder: (context, value, child) {
+      builder: (_, __, ___) {
         return MyApp();
       },
     ),
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: Global.APP_NAME,
       debugShowCheckedModeBanner: false,
       home: BaseLayoutView(),
+      theme: ThemeData(primarySwatch: BrandColors.brandColor),
     );
   }
 }

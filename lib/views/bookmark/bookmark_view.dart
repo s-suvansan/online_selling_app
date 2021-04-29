@@ -12,7 +12,7 @@ class BookmarkView extends StatelessWidget {
 }
 
 class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
-  _FavouriteList({Key key}) : super(key: key, reactive: true);
+  _FavouriteList({Key key}) : super(key: key, reactive: false);
 
   @override
   Widget build(BuildContext context, BookmarkViewModel model) {
@@ -48,7 +48,7 @@ class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
                         separatorBuilder: (context, i) => SizedBox(height: 8.0),
                       )
                     : Empty(
-                        image: EMPTY_ASTRONAUT,
+                        image: EMPTY_MAN,
                         size: 150.0,
                         moveFromTopBy: 180.0,
                       )

@@ -7,6 +7,9 @@ class App {
   static Random _rnd = Random();
   static NumberFormat currencyFormat = new NumberFormat("#,##0.00", "en_US");
 
+  // shareprefrence key const
+  static const IS_DARK = 'is_dark';
+
   //Get the devie Hight
   static double getDeviceHight(BuildContext context) {
     return MediaQuery.of(context).size.height;
@@ -44,14 +47,14 @@ class App {
 
   // svg image view
   static SvgPicture svgImage({
-    @required svg,
+    @required String svg,
     Color color,
     double width = 50.0,
     double height = 50.0,
   }) {
     return SvgPicture.asset(
       svg,
-      color: color ?? BrandColors.shadow,
+      color: color,
       width: width,
       height: height,
     );
@@ -243,6 +246,19 @@ class App {
       flushbarStyle: FlushbarStyle.FLOATING,
       duration: Duration(seconds: 10),
     )..show(context);
+  }
+
+  // for save value into the sharedPreferences for get dark thenme or not
+  static setIsDark({@required bool value}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(IS_DARK, value ?? false);
+  }
+
+  // for get value from the sharedPreferences for check dark thenme or not
+  static Future<bool> getIsDark() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool boolValue = prefs.getBool(IS_DARK);
+    return boolValue ?? false;
   }
 }
 

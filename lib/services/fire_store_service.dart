@@ -10,7 +10,7 @@ class FireStoreService {
   static Stream<QuerySnapshot> getFavouriteProducts() {
     return Firestore.instance
         .collection(Global.PRODUCTS)
-        .orderBy(Global.POST_AT, descending: true)
+        // .orderBy(Global.POST_AT, descending: true)
         .where(
           Global.FAVOURITE_USER_IDS,
           arrayContains: Global.userInfo.uid,
