@@ -107,64 +107,62 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
           ),
           Positioned(
             bottom: 0.0,
-            child: Container(
-              // height: 100.0,
-              width: App.getDeviceWidth(context) * 0.47,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.2, 0.4, 0.8],
-                    colors: [
-                      BrandColors.dark.withOpacity(0.1),
-                      BrandColors.dark.withOpacity(0.3),
-                      BrandColors.dark.withOpacity(0.5),
-                      // BrandColors.dark,
-                      // BrandColors.dark,
-                    ],
-                  ),
-                  // color: BrandColors.dark,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(8.0),
-                    bottomRight: Radius.circular(8.0),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: BrandColors.shadow.withOpacity(0.1),
-                      spreadRadius: 0.5,
-                      offset: Offset.zero,
-                      blurRadius: 2.0,
-                    ),
-                  ]),
-              child: Container(
-                padding: EdgeInsets.all(4.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BrandTexts.titleBold(
-                      text: model.product[index].title,
-                      color: BrandColors.light,
-                      maxLines: 2,
-                    ),
-                    BrandTexts.subTitleBold(
-                      text: "${App.getPrice(model.product[index].price)}",
-                      color: BrandColors.light,
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        BrandTexts.caption(
-                          text: "${App.getTime(model.product[index].postAt)}",
-                          color: BrandColors.light,
-                        ),
+            child: Consumer<ThemeChange>(builder: (context, value, child) {
+              return Container(
+                // height: 100.0,
+                width: App.getDeviceWidth(context) * 0.47,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: [0.1, 0.8],
+                      colors: [
+                        getIt<ThemeChange>().isDark ? BrandColors.light.withOpacity(0.2) : BrandColors.dark.withOpacity(0.2),
+                        getIt<ThemeChange>().isDark ? BrandColors.light.withOpacity(0.5) : BrandColors.dark.withOpacity(0.5),
                       ],
                     ),
-                  ],
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(8.0),
+                      bottomRight: Radius.circular(8.0),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: BrandColors.shadow.withOpacity(0.1),
+                        spreadRadius: 0.5,
+                        offset: Offset.zero,
+                        blurRadius: 2.0,
+                      ),
+                    ]),
+                child: Container(
+                  padding: EdgeInsets.all(4.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BrandTexts.titleBold(
+                        text: model.product[index].title,
+                        color: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
+                        maxLines: 2,
+                      ),
+                      BrandTexts.subTitleBold(
+                        text: "${App.getPrice(model.product[index].price)}",
+                        color: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          BrandTexts.caption(
+                            text: "${App.getTime(model.product[index].postAt)}",
+                            color: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ),
+              );
+            }),
           ),
         ],
       ),

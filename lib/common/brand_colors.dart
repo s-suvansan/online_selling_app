@@ -36,6 +36,7 @@ class BrandColors {
   static Color dark2 = Color(0xFF181818);
   static Color dark3 = Color(0xFF272727);
   static Color dark4 = Color(0xFF404040);
+  static Color dark5 = Color(0xFFB3B3B3);
 
   // dark blue
   static Color darkBlue1 = Color(0xFF15202B);

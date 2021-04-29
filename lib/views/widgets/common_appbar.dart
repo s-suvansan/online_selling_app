@@ -41,12 +41,13 @@ class _CommonAppBarState extends State<CommonAppBar> {
     return Stack(
       children: [
         AppBar(
-          // automaticallyImplyLeading: false,
+          automaticallyImplyLeading: false,
           centerTitle: widget.isCenterTitle,
-          backgroundColor: BrandColors.light,
+          backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
           title: BrandTexts.titleBold(
             text: widget.title ?? "",
-            color: BrandColors.dark.withOpacity(widget.needDarkText ? 1.0 : 0.6),
+            color:
+                getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark.withOpacity(widget.needDarkText ? 1.0 : 0.6),
             fontSize: 20.0,
           ),
         ),

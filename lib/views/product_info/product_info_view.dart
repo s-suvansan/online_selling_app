@@ -9,7 +9,7 @@ class ProductInfoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProductInfoViewModel>.nonReactive(
       builder: (context, model, child) => Scaffold(
-        backgroundColor: BrandColors.light,
+        backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
         appBar: _AppBar(),
         body: Container(
           child: ListView(
@@ -51,7 +51,7 @@ class _TopImagesView extends ViewModelWidget<ProductInfoViewModel> {
   Widget build(BuildContext context, ProductInfoViewModel model) {
     return Container(
         height: 220.0,
-        color: BrandColors.shadowLight,
+        color: getIt<ThemeChange>().isDark ? BrandColors.dark4 : BrandColors.shadowLight,
         child: Stack(
           children: [
             PageView.builder(
@@ -75,7 +75,7 @@ class _TopImagesView extends ViewModelWidget<ProductInfoViewModel> {
                   width: 25.0,
                   padding: EdgeInsets.only(right: 6.0),
                   decoration: BoxDecoration(
-                      color: BrandColors.light,
+                      color: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(20.0),
                         bottomRight: Radius.circular(20.0),
@@ -97,7 +97,7 @@ class _TopImagesView extends ViewModelWidget<ProductInfoViewModel> {
                   width: 25.0,
                   padding: EdgeInsets.only(left: 6.0),
                   decoration: BoxDecoration(
-                      color: BrandColors.light,
+                      color: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20.0),
                         bottomLeft: Radius.circular(20.0),
@@ -149,7 +149,7 @@ class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
     return Container(
       padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
       width: App.getDeviceWidth(context),
-      color: BrandColors.light,
+      color: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -159,12 +159,12 @@ class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
               fontSize: 24.0,
               fontWeight: BrandTexts.bold,
               maxLines: 3,
-              color: BrandColors.shadowDark),
+              color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark),
           SizedBox(height: 8.0),
           // posted time
           BrandTexts.caption(
             text: "Posted at ${App.showDateTimeInFormat(model.product.postAt, format: DateTimeFormat.DateAndTime)}",
-            color: BrandColors.shadowDark,
+            color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark,
           ),
           if (model.product.postBy != "") SizedBox(height: 8.0),
           // posted by
@@ -173,17 +173,17 @@ class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
               children: [
                 BrandTexts.caption(
                   text: "Posted by ${model.product.postBy}",
-                  color: BrandColors.shadowDark,
+                  color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark,
                 ),
                 BrandTexts.caption(
                   text: ", ${model.product.postFrom} ",
-                  color: BrandColors.shadowDark,
+                  color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark,
                 ),
               ],
             ),
 
           SizedBox(height: 16.0),
-          Divider(height: 0.0, color: BrandColors.shadowDark),
+          Divider(height: 0.0, color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark),
           SizedBox(height: 8.0),
           //price
           Row(
@@ -194,7 +194,7 @@ class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
                 text: "${App.getPrice(model.product.price)}",
                 fontSize: 20.0,
                 fontWeight: BrandTexts.black,
-                color: BrandColors.shadowDark,
+                color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark,
                 maxLines: 3,
               ),
               SizedBox(width: 8.0),
@@ -202,12 +202,12 @@ class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
                 BrandTexts.subTitleBold(
                   text: "Negotiable",
                   fontStyle: FontStyle.italic,
-                  color: BrandColors.shadow,
+                  color: getIt<ThemeChange>().isDark ? BrandColors.dark5.withOpacity(0.5) : BrandColors.shadow,
                 )
             ],
           ),
           SizedBox(height: 8.0),
-          Divider(height: 0.0, color: BrandColors.shadowDark),
+          Divider(height: 0.0, color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark),
           SizedBox(height: 16.0),
           if (model.product.desc != "") _DescView(),
         ],
@@ -230,13 +230,13 @@ class _DescView extends ViewModelWidget<ProductInfoViewModel> {
         children: [
           BrandTexts.titleBold(
             text: "Description",
-            color: BrandColors.dark,
+            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
           ),
           SizedBox(height: 8.0),
           //description
           BrandTexts.titleBold(
             text: "${model.product.desc} ",
-            color: BrandColors.shadowDark,
+            color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark,
             textAlign: TextAlign.justify,
             maxLines: model.showMore ? 100 : 5,
           ),
@@ -252,22 +252,22 @@ class _DescView extends ViewModelWidget<ProductInfoViewModel> {
                     padding: EdgeInsets.only(right: 8.0, left: 2.0),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: BrandColors.shadowLight,
+                      color: getIt<ThemeChange>().isDark ? BrandColors.dark3 : BrandColors.shadowLight,
                       borderRadius: BorderRadius.circular(16.0),
                       border: Border.all(
-                        color: BrandColors.shadow,
+                        color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadow,
                       ),
                     ),
                     child: Row(
                       children: [
                         Icon(
                           model.showMore ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                          color: BrandColors.shadow,
+                          color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadow,
                           size: 26.0,
                         ),
                         BrandTexts.subTitleBold(
                           text: model.showMore ? "Show less" : "Show more",
-                          color: BrandColors.shadow,
+                          color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadow,
                           textAlign: TextAlign.center,
                         ),
                       ],
