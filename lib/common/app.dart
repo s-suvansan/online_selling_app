@@ -196,13 +196,15 @@ class App {
   }
 
   // show bottom sheet
-  static void showBottomPopup(BuildContext context, Widget widget, {double reduceHeightBy = 0.0}) {
-    showModalBottomSheet(
+  static Future<bool> showBottomPopup(BuildContext context, Widget widget, {double reduceHeightBy = 0.0}) async {
+    bool _value = false;
+    _value = await showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         builder: (BuildContext bc) {
           return Container(height: getDeviceHight(context) - reduceHeightBy, child: widget);
         });
+    return _value;
   }
 
   // url lancher

@@ -22,4 +22,9 @@ class HomeViewModel extends BaseViewModel {
       _isLoading = false;
     }
   }
+
+  // open product info view
+  void openProductInfo(BuildContext context, Widget widget) {
+    App.showBottomPopup(context, widget, reduceHeightBy: 25.0);
+  }
 }

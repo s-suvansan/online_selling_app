@@ -12,7 +12,7 @@ class BookmarkView extends StatelessWidget {
 }
 
 class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
-  _FavouriteList({Key key}) : super(key: key, reactive: false);
+  _FavouriteList({Key key}) : super(key: key, reactive: true);
 
   @override
   Widget build(BuildContext context, BookmarkViewModel model) {
@@ -34,12 +34,12 @@ class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
                         physics: BouncingScrollPhysics(),
                         itemCount: model.product.length,
                         itemBuilder: (context, index) => GestureDetector(
-                          onTap: () => App.showBottomPopup(
-                              context,
-                              ProductInfoView(
-                                productModel: model.product[index],
-                              ),
-                              reduceHeightBy: 25.0),
+                          onTap: () => model.openProductInfo(
+                            context,
+                            ProductInfoView(
+                              productModel: model.product[index],
+                            ),
+                          ),
                           child: _FavouriteListTile(
                             key: UniqueKey(),
                             index: index,

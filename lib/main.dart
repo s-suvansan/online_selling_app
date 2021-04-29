@@ -1,7 +1,15 @@
 import 'main_index.dart';
 
 void main() {
-  runApp(MyApp());
+  setup();
+  runApp(ChangeNotifierProvider(
+    create: (_) => getIt<ThemeChange>(),
+    child: Consumer<ThemeChange>(
+      builder: (context, value, child) {
+        return MyApp();
+      },
+    ),
+  ));
 }
 
 class MyApp extends StatelessWidget {

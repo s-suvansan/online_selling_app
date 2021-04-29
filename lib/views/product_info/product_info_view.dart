@@ -2,6 +2,7 @@ import '../../main_index.dart';
 
 class ProductInfoView extends StatelessWidget {
   final ProductModel productModel;
+
   const ProductInfoView({Key key, @required this.productModel}) : super(key: key);
 
   @override
@@ -32,12 +33,11 @@ class ProductInfoView extends StatelessWidget {
 class _AppBar extends ViewModelWidget<ProductInfoViewModel> implements PreferredSizeWidget {
   const _AppBar({Key key}) : super(key: key, reactive: false);
   @override
-  Widget build(BuildContext context, ProductInfoViewModel viewModel) {
+  Widget build(BuildContext context, ProductInfoViewModel model) {
     return CommonAppBar(
       title: "Product Info",
       isShowLike: true,
-      isLiked: false,
-      onLike: (isLiked) {},
+      docId: model.product.id ?? "",
     );
   }
 

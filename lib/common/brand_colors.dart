@@ -5,6 +5,7 @@ class BrandColors {
   static Color brandColor = Colors.orange;
   static Color brandColorLight = Colors.orange[200];
   static Color brandColorDark = Colors.orange[800];
+  static Color orage = Color(0xFFFF652F);
 
   // black and white
   static Color dark = Colors.black;
@@ -29,4 +30,16 @@ class BrandColors {
   static Color smsColor = Colors.blue[700];
   static Color whatsappColor = Color(0xFF25D366); // dangers - #d9534f
 
+  // dark theme related colors
+  // black
+  static Color dark1 = Color(0xFF121212);
+  static Color dark2 = Color(0xFF181818);
+  static Color dark3 = Color(0xFF272727);
+  static Color dark4 = Color(0xFF404040);
+
+  // dark blue
+  static Color darkBlue1 = Color(0xFF15202B);
+  static Color darkBlue2 = Color(0xFF192734);
+  static Color darkBlue3 = Color(0xFF22303C);
+  static Color grayBlue = Color(0xFF8899A6);
 }

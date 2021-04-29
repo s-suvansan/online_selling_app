@@ -5,8 +5,8 @@ class CommonAppBar extends StatefulWidget {
   final bool isCenterTitle;
   final bool needDarkText;
   final bool isShowLike;
-  final bool isLiked;
-  final Function(bool) onLike;
+  final String docId;
+  // final Function(bool) onLike;
 
   const CommonAppBar({
     Key key,
@@ -14,8 +14,8 @@ class CommonAppBar extends StatefulWidget {
     this.isCenterTitle = true,
     this.needDarkText = false,
     this.isShowLike = false,
-    this.isLiked = false,
-    this.onLike,
+    this.docId,
+    // this.onLike,
   }) : super(key: key);
 
   @override
@@ -27,7 +27,13 @@ class _CommonAppBarState extends State<CommonAppBar> {
   @override
   void initState() {
     super.initState();
-    isLike = widget.isLiked;
+    if (widget.isShowLike && widget.docId != "") {
+      FireStoreService.isFavouriteProduct(docId: widget.docId).then((value) {
+        setState(() {
+          isLike = value;
+        });
+      });
+    }
   }
 
   @override
@@ -68,9 +74,19 @@ class _CommonAppBarState extends State<CommonAppBar> {
   }
 
   void setLike() {
+    setLikeFirestore();
     setState(() {
       isLike = !isLike;
-      widget.onLike(isLike);
     });
+    // widget.onLike(isLike);
+  }
+
+  // function for like and unlike in firebase
+  void setLikeFirestore() {
+    if (!isLike) {
+      FireStoreService.favouriteProduct(docId: widget.docId);
+    } else if (isLike) {
+      FireStoreService.unFavouriteProduct(docId: widget.docId);
+    }
   }
 }

@@ -37,12 +37,12 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                           crossAxisCount: 2,
                           itemCount: model.product.length,
                           itemBuilder: (context, index) => GestureDetector(
-                            onTap: () => App.showBottomPopup(
-                                context,
-                                ProductInfoView(
-                                  productModel: model.product[index],
-                                ),
-                                reduceHeightBy: 25.0),
+                            onTap: () => model.openProductInfo(
+                              context,
+                              ProductInfoView(
+                                productModel: model.product[index],
+                              ),
+                            ),
                             child: _ProductGridTile(
                               key: UniqueKey(),
                               index: index,
@@ -105,19 +105,6 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
                   : NO_IMAGE,
             ),
           ),
-          /* Positioned(
-              height: 28.0,
-              top: 8.0,
-              right: 4.0,
-              child: CircleAvatar(
-                backgroundColor: BrandColors.dark.withOpacity(0.2),
-                // radius: 28.0,
-                child: App.svgImage(
-                  svg: index.isOdd ? LIKE_FILL : LIKE,
-                  height: 20.0,
-                  color: index.isOdd ? BrandColors.brandColorLight : BrandColors.light,
-                ),
-              )), */
           Positioned(
             bottom: 0.0,
             child: Container(
@@ -127,9 +114,10 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    stops: [0.1, 0.8],
+                    stops: [0.2, 0.4, 0.8],
                     colors: [
-                      BrandColors.glass,
+                      BrandColors.dark.withOpacity(0.1),
+                      BrandColors.dark.withOpacity(0.3),
                       BrandColors.dark.withOpacity(0.5),
                       // BrandColors.dark,
                       // BrandColors.dark,
