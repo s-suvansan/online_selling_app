@@ -9,6 +9,7 @@ class App {
 
   // shareprefrence key const
   static const IS_DARK = 'is_dark';
+  static const USER_ID = 'user_id';
 
   //Get the devie Hight
   static double getDeviceHight(BuildContext context) {
@@ -248,7 +249,7 @@ class App {
     )..show(context);
   }
 
-  // for save value into the sharedPreferences for get dark thenme or not
+  // for save value into the sharedPreferences for set dark thenme or not
   static setIsDark({@required bool value}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(IS_DARK, value ?? false);
@@ -259,6 +260,19 @@ class App {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool boolValue = prefs.getBool(IS_DARK);
     return boolValue ?? false;
+  }
+
+  //for save value into sharedPreferences for set user id
+  static setUserId({@required String value}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(USER_ID, value ?? "");
+  }
+
+  // for get value from the sharedPreferences for get user id
+  static Future<String> getUserId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String value = prefs.getString(USER_ID);
+    return value ?? "";
   }
 }
 

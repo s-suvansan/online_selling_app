@@ -10,4 +10,8 @@ class Global {
 
   //user details
   static FirebaseUser userInfo;
+
+  // language
+  static const String TAMIL = "tamil";
+  static const String ENGLISH = "english";
 }

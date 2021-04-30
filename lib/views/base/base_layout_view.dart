@@ -23,7 +23,7 @@ class _AppBar extends ViewModelWidget<BaseLayoutViewModel> implements PreferredS
 
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
-    return Consumer<ThemeChange>(builder: (context, value, child) {
+    return Consumer<ThemeChange>(builder: (_, __, ___) {
       return AppBar(
         centerTitle: true,
         backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
