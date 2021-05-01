@@ -39,9 +39,11 @@ class App {
       if (price != null && price != "") {
         _price = double.parse(price.toString());
       }
-      _value = needSpace ? "Rs. ${currencyFormat.format(_price).toString()}" : "Rs.${currencyFormat.format(_price).toString()}";
+      _value = needSpace
+          ? "${getIt<LanguageChange>().lang.rs}. ${currencyFormat.format(_price).toString()}"
+          : "${getIt<LanguageChange>().lang.rs}.${currencyFormat.format(_price).toString()}";
     } catch (e) {
-      _value = needSpace ? "Rs. 0.00" : "Rs.0.00";
+      _value = needSpace ? "${getIt<LanguageChange>().lang.rs}. 0.00" : "${getIt<LanguageChange>().lang.rs}.0.00";
     }
     return _value;
   }
@@ -70,21 +72,26 @@ class App {
       int _time = _now.seconds - _postAt.seconds;
       if (_time < 60) {
         //1min - 60 sec
-        _value = "just now";
+        _value = "${getIt<LanguageChange>().lang.justNow}";
       } else if (_time < 3600) {
         //1hr - 3600 sec
-        _value = "${_time ~/ 60} ${(_time ~/ 60) > 1 ? "mins" : "min"} ago";
+        _value =
+            "${_time ~/ 60} ${(_time ~/ 60) > 1 ? "${getIt<LanguageChange>().lang.mins}" : "${getIt<LanguageChange>().lang.min}"} ${getIt<LanguageChange>().lang.ago}";
       } else if (_time < 86400) {
         //1day - 86400 sec
-        _value = "${_time ~/ 3600} ${(_time ~/ 3600) > 1 ? "hrs" : "hr"} ago";
+        _value =
+            "${_time ~/ 3600} ${(_time ~/ 3600) > 1 ? "${getIt<LanguageChange>().lang.hrs}" : "${getIt<LanguageChange>().lang.hr}"} ${getIt<LanguageChange>().lang.ago}";
       } else if (_time < 2592000) {
         //1 month - 2592000 sec
-        _value = "${_time ~/ 86400} ${(_time ~/ 86400) > 1 ? "days" : "day"} ago";
+        _value =
+            "${_time ~/ 86400} ${(_time ~/ 86400) > 1 ? "${getIt<LanguageChange>().lang.days}" : "${getIt<LanguageChange>().lang.day}"} ${getIt<LanguageChange>().lang.ago}";
       } else if (_time < 31536000) {
         //1year - 31536000 sec
-        _value = "${_time ~/ 2592000} ${(_time ~/ 2592000) > 1 ? "months" : "month"} ago";
+        _value =
+            "${_time ~/ 2592000} ${(_time ~/ 2592000) > 1 ? "${getIt<LanguageChange>().lang.months}" : "${getIt<LanguageChange>().lang.month}"} ${getIt<LanguageChange>().lang.ago}";
       } else {
-        _value = "${_time ~/ 31536000} ${(_time ~/ 31536000) > 1 ? "years" : "year"} ago";
+        _value =
+            "${_time ~/ 31536000} ${(_time ~/ 31536000) > 1 ? "${getIt<LanguageChange>().lang.years}" : "${getIt<LanguageChange>().lang.year}"} ${getIt<LanguageChange>().lang.ago}";
       }
     } catch (e) {
       _value = "";
@@ -290,4 +297,23 @@ enum DateFormat {
 enum TimeFormat {
   LocalTime, // 03:24:00 AM or PM
   StandardTime, // 15:24:00
+}
+
+// language code enum
+enum Lang {
+  English,
+  Tamil,
+}
+
+extension LangEnumExtenstion on Lang {
+  String get code {
+    switch (this) {
+      case Lang.English:
+        return "en";
+      case Lang.Tamil:
+        return "ta";
+      default:
+        return "en";
+    }
+  }
 }

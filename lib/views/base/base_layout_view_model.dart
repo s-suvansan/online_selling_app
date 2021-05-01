@@ -7,6 +7,11 @@ class BaseLayoutViewModel extends BaseViewModel {
   PageController _pageController = PageController();
   int _currentIndex = 0;
   int _lastIndex = 0;
+  List<String> get bottomTapTexts => [
+        getIt<LanguageChange>().lang.home,
+        getIt<LanguageChange>().lang.favourites,
+        getIt<LanguageChange>().lang.settings,
+      ];
   List<BottomTaps> _bottomTaps = [
     BottomTaps(index: 0, icon: HOME, filledIcon: HOME_FILL, title: "Home"),
     BottomTaps(index: 1, icon: LIKE, filledIcon: LIKE_FILL, title: "Favourite"),

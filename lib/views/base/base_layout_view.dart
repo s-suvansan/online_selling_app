@@ -58,30 +58,37 @@ class _BodyPart extends ViewModelWidget<BaseLayoutViewModel> {
     return Consumer<ThemeChange>(builder: (context, value, child) {
       return Container(
         decoration: BoxDecoration(
-            color: getIt<ThemeChange>().isDark ? BrandColors.dark4 : BrandColors.shadowLight.withOpacity(0.9),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(24.0),
-              topRight: Radius.circular(24.0),
-            ),
-            image: DecorationImage(image: AssetImage(getIt<ThemeChange>().isDark ? DARK_BG : LIGHT_BG), fit: BoxFit.cover)),
-        child: PageView(
-          physics: NeverScrollableScrollPhysics(),
-          pageSnapping: true,
-          controller: model.pageController,
-          children: <Widget>[
-            HomeView(),
-            BookmarkView(),
-          ],
+          color: getIt<ThemeChange>().isDark ? BrandColors.dark4 : BrandColors.shadowLight.withOpacity(0.9),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24.0),
+            topRight: Radius.circular(24.0),
+          ),
+          image: DecorationImage(
+            image: AssetImage(getIt<ThemeChange>().isDark ? DARK_BG : LIGHT_BG),
+            fit: BoxFit.cover,
+          ),
         ),
-        /* child: IndexedStack(
-            index: model.lastIndex,
-            children: [
-              HomeView(),
-              BookmarkView(),
-            ],
-          ), */
+        child: _PageViewPart(),
       );
     });
+  }
+}
+
+//pageview part
+class _PageViewPart extends ViewModelWidget<BaseLayoutViewModel> {
+  _PageViewPart({Key key}) : super(key: key, reactive: false);
+
+  @override
+  Widget build(BuildContext context, BaseLayoutViewModel model) {
+    return PageView(
+      physics: NeverScrollableScrollPhysics(),
+      pageSnapping: true,
+      controller: model.pageController,
+      children: <Widget>[
+        HomeView(),
+        BookmarkView(),
+      ],
+    );
   }
 }
 
@@ -91,31 +98,33 @@ class _BottomBar extends ViewModelWidget<BaseLayoutViewModel> {
 
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
-    return BottomNavigationBar(
-      currentIndex: model.currentIndex,
-      onTap: (int index) => model.selectTaps(index, context: context),
-      backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
-      selectedFontSize: 12.0,
-      unselectedFontSize: 12.0,
-      selectedItemColor: BrandColors.brandColorDark,
-      elevation: 10.0,
-      unselectedItemColor: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow,
-      unselectedLabelStyle: TextStyle(color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow),
-      items: model.bottomTaps.map((taps) {
-        return BottomNavigationBarItem(
-          icon: App.svgImage(
-              svg: taps.index == model.currentIndex ? taps.filledIcon : taps.icon,
-              color: taps.index == model.currentIndex
-                  ? BrandColors.brandColorDark
-                  : getIt<ThemeChange>().isDark
-                      ? BrandColors.light
-                      : BrandColors.shadow,
-              // width: 24.0,
-              height: 24.0),
-          backgroundColor: BrandColors.brandColor,
-          label: taps.title,
-        );
-      }).toList(),
-    );
+    return Consumer<LanguageChange>(builder: (context, value, child) {
+      return BottomNavigationBar(
+        currentIndex: model.currentIndex,
+        onTap: (int index) => model.selectTaps(index, context: context),
+        backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
+        selectedFontSize: 12.0,
+        unselectedFontSize: 12.0,
+        selectedItemColor: BrandColors.brandColorDark,
+        elevation: 10.0,
+        unselectedItemColor: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow,
+        unselectedLabelStyle: TextStyle(color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow),
+        items: model.bottomTaps.map((taps) {
+          return BottomNavigationBarItem(
+            icon: App.svgImage(
+                svg: taps.index == model.currentIndex ? taps.filledIcon : taps.icon,
+                color: taps.index == model.currentIndex
+                    ? BrandColors.brandColorDark
+                    : getIt<ThemeChange>().isDark
+                        ? BrandColors.light
+                        : BrandColors.shadow,
+                // width: 24.0,
+                height: 24.0),
+            backgroundColor: BrandColors.brandColor,
+            label: model.bottomTapTexts[taps.index],
+          );
+        }).toList(),
+      );
+    });
   }
 }

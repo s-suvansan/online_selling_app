@@ -10,7 +10,7 @@ class SettingView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 150.0,
+                    // height: 150.0,
                     width: App.getDeviceWidth(context) - 150.0,
                     decoration: BoxDecoration(
                         color: getIt<ThemeChange>().isDark ? BrandColors.dark : BrandColors.light,
@@ -26,11 +26,19 @@ class SettingView extends StatelessWidget {
                     child: Center(
                       child: Column(
                         children: [
-                          BrandTexts.header(text: "Settings"),
+                          BrandTexts.header(text: model.setting),
                           RaisedButton(
                             child: BrandTexts.header(text: "ok"),
                             onPressed: () => model.onClick(),
-                          )
+                          ),
+                          RaisedButton(
+                            child: BrandTexts.header(text: "en"),
+                            onPressed: () => model.onLangClick(),
+                          ),
+                          RaisedButton(
+                            child: BrandTexts.header(text: "ta"),
+                            onPressed: () => model.onLangClick(isEn: false),
+                          ),
                         ],
                       ),
                     ),

@@ -5,4 +5,15 @@ class SettingViewModel extends BaseViewModel {
     getIt<ThemeChange>().changedark();
     // notifyListeners();
   }
+
+  String get setting => getIt<LanguageChange>().lang.home;
+
+  onLangClick({bool isEn = true}) {
+    FireStoreService.getLanguage(docName: isEn ? Global.ENGLISH : Global.TAMIL).then((value) {
+      if (value != null) {
+        getIt<LanguageChange>().setLanguage(value);
+        getIt<LanguageChange>().setLanguageCode = isEn ? Lang.English.code : Lang.Tamil.code;
+      }
+    });
+  }
 }

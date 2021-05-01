@@ -3,6 +3,7 @@ import '../main_index.dart';
 class BrandTexts {
   // brand font
   static String brandFont = "LatoBlack";
+  static String tamilFont = "Bamini";
 
   // font weights
   static FontWeight thin = FontWeight.w100;
@@ -181,7 +182,7 @@ class BrandTexts {
     FontStyle fontStyle = FontStyle.normal,
   }) =>
       TextStyle(
-          fontFamily: brandFont,
+          fontFamily: /* getIt<LanguageChange>().languageCode == Lang.Tamil.code ? tamilFont : */ brandFont,
           fontStyle: fontStyle,
           fontSize: fontSize,
           fontWeight: fontWeight ?? regular,

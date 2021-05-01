@@ -43,4 +43,15 @@ class FireStoreService {
     }
     return _value;
   }
+
+  // get language when change language
+  static Future<LanguageModel> getLanguage({@required String docName}) async {
+    DocumentSnapshot doc = await Firestore.instance.collection(Global.LANGUAGE).document(docName).get();
+    if (doc != null && doc.data != null) {
+      return LanguageModel.fromJson(doc.data);
+    }
+    return null;
+  }
+  /* .catchError(
+          (onError) => print("onErronFuck ${onError.toString()}"), */
 }

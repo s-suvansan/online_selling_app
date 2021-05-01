@@ -11,7 +11,8 @@ class Global {
   //user details
   static FirebaseUser userInfo;
 
-  // language
+  // language firestroe collecton and document name
+  static const String LANGUAGE = "languages";
   static const String TAMIL = "tamil";
   static const String ENGLISH = "english";
 }
