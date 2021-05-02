@@ -1,6 +1,8 @@
 import '../../main_index.dart';
 
 class HomeView extends StatelessWidget {
+  const HomeView({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.nonReactive(
@@ -13,7 +15,7 @@ class HomeView extends StatelessWidget {
 
 // grid view
 class _ProductGridView extends ViewModelWidget<HomeViewModel> {
-  _ProductGridView({Key key}) : super(key: key, reactive: false);
+  const _ProductGridView({Key key}) : super(key: key, reactive: false);
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
@@ -32,7 +34,11 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                             topRight: Radius.circular(24.0),
                           ),
                         ),
-                        child: StaggeredGridView.countBuilder(
+                        child:
+                            /* NotificationListener<ScrollNotification>(
+                          onNotification: (scrollNotification) => model.onScroll(scrollNotification),
+                          child: */
+                            StaggeredGridView.countBuilder(
                           physics: BouncingScrollPhysics(),
                           crossAxisCount: 2,
                           itemCount: model.product.length,
@@ -48,10 +54,11 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                               index: index,
                             ),
                           ),
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.6),
+                          staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.4),
                           crossAxisSpacing: 8.0,
                           mainAxisSpacing: 8.0,
                         ),
+                        // ),
                       )
                     : Empty(
                         text: "Empty product list.",
@@ -78,7 +85,7 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
   @override
   Widget build(BuildContext context, HomeViewModel model) {
     return Container(
-      height: 150.0,
+      // height: 150.0,
       decoration: BoxDecoration(
           color: BrandColors.glass,
           borderRadius: BorderRadius.all(
@@ -100,7 +107,9 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
             child: FadeInImage.memoryNetwork(
               placeholder: kTransparentImage,
               fit: BoxFit.cover,
-              image: (model.product[index].imageUrl != null && model.product[index].imageUrl.isNotEmpty)
+              image: (model.product[index].imageUrl != null &&
+                      model.product[index].imageUrl.isNotEmpty &&
+                      model.product[index].imageUrl[0] != "")
                   ? model.product[index].imageUrl[0]
                   : NO_IMAGE,
             ),

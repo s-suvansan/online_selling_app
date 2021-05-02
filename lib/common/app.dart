@@ -232,8 +232,10 @@ class App {
   // flush bar for info like snack bar
   static void showInfoBar(BuildContext context, {@required String msg, String title, Color textColor, Color bgColor}) {
     Flushbar(
-      titleText: title != null ? BrandTexts.titleBold(text: title, color: textColor ?? BrandColors.light) : SizedBox.shrink(),
-      messageText: BrandTexts.titleBold(text: msg, color: textColor ?? BrandColors.light),
+      titleText: title != null
+          ? BrandTexts.titleBold(text: title, color: textColor ?? BrandColors.light, maxLines: 2)
+          : SizedBox.shrink(),
+      messageText: BrandTexts.titleBold(text: msg, color: textColor ?? BrandColors.light, maxLines: 2),
       backgroundColor: bgColor ?? BrandColors.shadow,
       flushbarPosition: FlushbarPosition.TOP,
       boxShadows: [

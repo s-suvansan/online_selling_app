@@ -31,7 +31,7 @@ class ProductModel {
         desc: json["desc"] ?? "",
         price: json["price"] ?? "",
         imageUrl: json["imageUrl"] != null ? List<String>.from(json["imageUrl"].map((x) => x)) : [],
-        postAt: json["postAt"] ?? "",
+        postAt: json["postAt"] ?? Timestamp.now(),
         postBy: json["postBy"] ?? "",
         postFrom: json["postFrom"] ?? "",
         keywords: json["keywords"] != null ? List<String>.from(json["keywords"].map((x) => x)) : [],

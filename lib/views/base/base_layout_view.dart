@@ -76,7 +76,7 @@ class _BodyPart extends ViewModelWidget<BaseLayoutViewModel> {
 
 //pageview part
 class _PageViewPart extends ViewModelWidget<BaseLayoutViewModel> {
-  _PageViewPart({Key key}) : super(key: key, reactive: false);
+  const _PageViewPart({Key key}) : super(key: key, reactive: false);
 
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
@@ -94,7 +94,7 @@ class _PageViewPart extends ViewModelWidget<BaseLayoutViewModel> {
 
 // bottom navigation bar
 class _BottomBar extends ViewModelWidget<BaseLayoutViewModel> {
-  _BottomBar({Key key}) : super(key: key, reactive: true);
+  const _BottomBar({Key key}) : super(key: key, reactive: true);
 
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
