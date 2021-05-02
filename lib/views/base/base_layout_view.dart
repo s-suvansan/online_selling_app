@@ -1,15 +1,20 @@
 import '../../main_index.dart';
 
 class BaseLayoutView extends StatelessWidget {
+  static const routeName = "baseLayoutView";
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<BaseLayoutViewModel>.nonReactive(
         builder: (context, model, child) => SafeArea(
               child: Scaffold(
                 backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
+                resizeToAvoidBottomInset: false,
                 appBar: _AppBar(),
                 body: _BodyPart(),
-                bottomNavigationBar: _BottomBar(),
+                // bottomNavigationBar: _BottomBar(),
+                floatingActionButton: _BottomBar(),
+                floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+                floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
               ),
             ),
         onModelReady: (model) => model.onInit(),
@@ -74,20 +79,44 @@ class _BodyPart extends ViewModelWidget<BaseLayoutViewModel> {
   }
 }
 
-//pageview part
+//pages view part
 class _PageViewPart extends ViewModelWidget<BaseLayoutViewModel> {
   const _PageViewPart({Key key}) : super(key: key, reactive: false);
 
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
-    return PageView(
-      physics: NeverScrollableScrollPhysics(),
-      pageSnapping: true,
-      controller: model.pageController,
-      children: <Widget>[
-        HomeView(),
-        BookmarkView(),
-      ],
+    return NotificationListener<ScrollNotification>(
+      onNotification: model.handleScrollNotification,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          _ShowHidePart(
+            pageIndex: 1,
+            page: BookmarkView(),
+          ),
+          _ShowHidePart(
+            pageIndex: 0,
+            page: HomeView(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ShowHidePart extends ViewModelWidget<BaseLayoutViewModel> {
+  final int pageIndex;
+  final Widget page;
+  const _ShowHidePart({Key key, this.pageIndex, this.page}) : super(key: key, reactive: true);
+  @override
+  Widget build(BuildContext context, BaseLayoutViewModel model) {
+    return AnimatedOpacity(
+      opacity: model.lastIndex == pageIndex ? 1.0 : 00,
+      duration: Duration(milliseconds: 300),
+      child: Offstage(
+        offstage: model.lastIndex != pageIndex,
+        child: page,
+      ),
     );
   }
 }
@@ -99,31 +128,36 @@ class _BottomBar extends ViewModelWidget<BaseLayoutViewModel> {
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
     return Consumer<LanguageChange>(builder: (context, value, child) {
-      return BottomNavigationBar(
-        currentIndex: model.currentIndex,
-        onTap: (int index) => model.selectTaps(index, context: context),
-        backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
-        selectedFontSize: 12.0,
-        unselectedFontSize: 12.0,
-        selectedItemColor: BrandColors.brandColorDark,
-        elevation: 10.0,
-        unselectedItemColor: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow,
-        unselectedLabelStyle: TextStyle(color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow),
-        items: model.bottomTaps.map((taps) {
-          return BottomNavigationBarItem(
-            icon: App.svgImage(
-                svg: taps.index == model.currentIndex ? taps.filledIcon : taps.icon,
-                color: taps.index == model.currentIndex
-                    ? BrandColors.brandColorDark
-                    : getIt<ThemeChange>().isDark
-                        ? BrandColors.light
-                        : BrandColors.shadow,
-                // width: 24.0,
-                height: 24.0),
-            backgroundColor: BrandColors.brandColor,
-            label: model.bottomTapTexts[taps.index],
-          );
-        }).toList(),
+      return Visibility(
+        maintainState: true,
+        maintainAnimation: true,
+        visible: !model.isHideBottomBar,
+        child: BottomNavigationBar(
+          currentIndex: model.currentIndex,
+          onTap: (int index) => model.chageTaps(index, context: context),
+          backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
+          selectedFontSize: 12.0,
+          unselectedFontSize: 12.0,
+          selectedItemColor: BrandColors.brandColorDark,
+          elevation: 10.0,
+          unselectedItemColor: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow,
+          unselectedLabelStyle: TextStyle(color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow),
+          items: model.bottomTaps.map((taps) {
+            return BottomNavigationBarItem(
+              icon: App.svgImage(
+                  svg: taps.index == model.currentIndex ? taps.filledIcon : taps.icon,
+                  color: taps.index == model.currentIndex
+                      ? BrandColors.brandColorDark
+                      : getIt<ThemeChange>().isDark
+                          ? BrandColors.light
+                          : BrandColors.shadow,
+                  // width: 24.0,
+                  height: 24.0),
+              backgroundColor: BrandColors.brandColor,
+              label: model.bottomTapTexts[taps.index],
+            );
+          }).toList(),
+        ),
       );
     });
   }

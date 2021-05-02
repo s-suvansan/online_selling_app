@@ -54,6 +54,9 @@ dependencies:
   # get it
   get_it: ^5.0.3
 
+  # caches network images
+  cached_network_image: ^2.5.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

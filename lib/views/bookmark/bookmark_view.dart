@@ -141,14 +141,14 @@ class _FavouriteListTile extends ViewModelWidget<BookmarkViewModel> {
               SizedBox(width: 8.0),
               ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                child: FadeInImage.memoryNetwork(
+                child: Container(
                   width: 90.0,
                   height: 90.0,
-                  placeholder: kTransparentImage,
-                  fit: BoxFit.cover,
-                  image: (model.product[index].imageUrl != null && model.product[index].imageUrl.isNotEmpty)
-                      ? model.product[index].imageUrl[0]
-                      : NO_IMAGE,
+                  child: App.cacheImage(
+                    (model.product[index].imageUrl != null && model.product[index].imageUrl.isNotEmpty)
+                        ? model.product[index].imageUrl[0]
+                        : NO_IMAGE,
+                  ),
                 ),
               ),
             ],

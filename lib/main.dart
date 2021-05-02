@@ -31,7 +31,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // title: Global.APP_NAME,
       debugShowCheckedModeBanner: false,
-      home: BaseLayoutView(),
+      routes: {
+        BaseLayoutView.routeName: (context) => BaseLayoutView(),
+      },
+      home: SplashView(),
       theme: ThemeData(primarySwatch: BrandColors.brandColor),
     );
   }

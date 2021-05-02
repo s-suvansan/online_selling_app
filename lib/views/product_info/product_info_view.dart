@@ -59,7 +59,7 @@ class _TopImagesView extends ViewModelWidget<ProductInfoViewModel> {
               controller: model.pageController,
               itemCount: model.product.imageUrl?.length,
               itemBuilder: (context, index) {
-                return Image.network(
+                return App.cacheImage(
                   model.product.imageUrl[index],
                   fit: BoxFit.contain,
                 );

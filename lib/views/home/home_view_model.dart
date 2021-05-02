@@ -28,31 +28,27 @@ class HomeViewModel extends BaseViewModel {
     App.showBottomPopup(context, widget, reduceHeightBy: 25.0);
   }
 
-/*   onScroll(ScrollNotification scrollNotification) {
-    if (scrollNotification is ScrollStartNotification) {
-      // _onStartScroll(scrollNotification.metrics);
+  bool handleScrollNotification(ScrollNotification notification) {
+    if (notification.depth == 0) {
+      if (notification is UserScrollNotification) {
+        final UserScrollNotification userScroll = notification;
+        switch (userScroll.direction) {
+          case ScrollDirection.forward:
+            // _hide.forward();
+            print("unhide");
+            break;
+          case ScrollDirection.reverse:
+            // _hide.reverse();
+            print("hide");
 
-      print("start");
-    } else if (scrollNotification is ScrollUpdateNotification) {
-      if (_isDownScrool(pixel: scrollNotification.metrics.pixels)) {
-        print("scroll up");
-      } else {
-        print("scroll down");
+            break;
+          case ScrollDirection.idle:
+            print("stable");
+
+            break;
+        }
       }
-    } else if (scrollNotification is ScrollEndNotification) {
-      // _onEndScroll(scrollNotification.metrics);
-      print("end");
     }
+    return false;
   }
-
-  double _val = 0.0;
-  bool _isDownScrool({double pixel}) {
-    if (_val < pixel) {
-      _val = pixel;
-      return true;
-    } else {
-      _val = pixel;
-      return false;
-    }
-  } */
 }

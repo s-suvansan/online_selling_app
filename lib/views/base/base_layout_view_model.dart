@@ -4,14 +4,10 @@ import '../../main_index.dart';
 
 class BaseLayoutViewModel extends BaseViewModel {
   // variables
-  PageController _pageController = PageController();
   int _currentIndex = 0;
   int _lastIndex = 0;
-  List<String> get bottomTapTexts => [
-        getIt<LanguageChange>().lang.home,
-        getIt<LanguageChange>().lang.favourites,
-        getIt<LanguageChange>().lang.settings,
-      ];
+  bool _isHideBottomBar = false;
+
   List<BottomTaps> _bottomTaps = [
     BottomTaps(index: 0, icon: HOME, filledIcon: HOME_FILL, title: "Home"),
     BottomTaps(index: 1, icon: LIKE, filledIcon: LIKE_FILL, title: "Favourite"),
@@ -19,37 +15,27 @@ class BaseLayoutViewModel extends BaseViewModel {
   ];
 
   //getter
-  PageController get pageController => _pageController;
   int get currentIndex => _currentIndex;
   int get lastIndex => _lastIndex;
+  bool get isHideBottomBar => _isHideBottomBar;
   List<BottomTaps> get bottomTaps => _bottomTaps;
+  List<String> get bottomTapTexts => [
+        getIt<LanguageChange>().lang.home,
+        getIt<LanguageChange>().lang.favourites,
+        getIt<LanguageChange>().lang.settings,
+      ];
 
-  // on init function
-  void onInit() {
-    print("check");
-    FireAuthService.checkUser().then((value) {
-      if (value.isLogin) {
-        print("user available");
-        Global.userInfo = value.user;
-      } else {
-        FireAuthService.createUser().then((user) {
-          Global.userInfo = user;
-        });
-      }
-    });
+  // init function
+  onInit() {
+    // _hide = AnimationController(duration: kThemeAnimationDuration, vsync: null);
   }
 
-  // for select taps in bottom bar
-  void selectTaps(int index, {BuildContext context}) {
+  void chageTaps(int index, {BuildContext context}) {
     if (index != 2) {
       if (_currentIndex != index) {
         _currentIndex = index;
         _lastIndex = index;
-        _pageController.animateToPage(
-          _currentIndex,
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
-        );
+
         notifyListeners();
       }
     } else {
@@ -68,6 +54,32 @@ class BaseLayoutViewModel extends BaseViewModel {
       _currentIndex = _lastIndex;
       notifyListeners();
     });
+  }
+
+  bool handleScrollNotification(ScrollNotification notification) {
+    if (notification.depth == 0) {
+      if (notification is UserScrollNotification) {
+        final UserScrollNotification userScroll = notification;
+        switch (userScroll.direction) {
+          case ScrollDirection.forward:
+            print("unhide");
+            _isHideBottomBar = false;
+            notifyListeners();
+            break;
+          case ScrollDirection.reverse:
+            print("hide");
+            _isHideBottomBar = true;
+            notifyListeners();
+            break;
+          case ScrollDirection.idle:
+            print("stable");
+            _isHideBottomBar = false;
+            notifyListeners();
+            break;
+        }
+      }
+    }
+    return false;
   }
 }
 

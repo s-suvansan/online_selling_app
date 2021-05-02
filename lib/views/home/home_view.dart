@@ -34,11 +34,7 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                             topRight: Radius.circular(24.0),
                           ),
                         ),
-                        child:
-                            /* NotificationListener<ScrollNotification>(
-                          onNotification: (scrollNotification) => model.onScroll(scrollNotification),
-                          child: */
-                            StaggeredGridView.countBuilder(
+                        child: StaggeredGridView.countBuilder(
                           physics: BouncingScrollPhysics(),
                           crossAxisCount: 2,
                           itemCount: model.product.length,
@@ -58,7 +54,6 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                           crossAxisSpacing: 8.0,
                           mainAxisSpacing: 8.0,
                         ),
-                        // ),
                       )
                     : Empty(
                         text: "Empty product list.",
@@ -104,10 +99,8 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            child: FadeInImage.memoryNetwork(
-              placeholder: kTransparentImage,
-              fit: BoxFit.cover,
-              image: (model.product[index].imageUrl != null &&
+            child: App.cacheImage(
+              (model.product[index].imageUrl != null &&
                       model.product[index].imageUrl.isNotEmpty &&
                       model.product[index].imageUrl[0] != "")
                   ? model.product[index].imageUrl[0]

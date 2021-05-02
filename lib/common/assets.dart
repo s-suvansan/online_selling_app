@@ -22,7 +22,9 @@ const NO_IMAGE =
 // pngs
 const EMPTY_HEART = 'assets/images/pngs/empty_heart.png';
 const EMPTY_ASTRONAUT = 'assets/images/pngs/empty_astronaut.png';
-// const SEACHING = 'assets/images/gifs/searching.gif';
+
+// app logo png
+const APP_LOGO = 'assets/images/pngs/app_logo.png';
 
 //jpgs
 const DARK_BG = 'assets/images/jpgs/dark_bg.jpg';

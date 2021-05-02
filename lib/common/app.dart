@@ -283,6 +283,16 @@ class App {
     String value = prefs.getString(USER_ID);
     return value ?? "";
   }
+
+  //cache the network images
+  static Widget cacheImage(String url, {BoxFit fit = BoxFit.cover}) {
+    return CachedNetworkImage(
+      imageUrl: url,
+      fit: fit,
+      // placeholder: (context, url) => CircularProgressIndicator(),
+      errorWidget: (context, url, error) => Icon(Icons.error),
+    );
+  }
 }
 
 enum DateTimeFormat {
