@@ -61,6 +61,9 @@ dependencies:
   # caches network images
   cached_network_image: ^2.5.1
 
+  # connectivity
+  connectivity: ^2.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

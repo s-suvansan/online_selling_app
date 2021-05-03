@@ -6,7 +6,7 @@ class SettingViewModel extends BaseViewModel {
     // notifyListeners();
   }
 
-  String get setting => getIt<LanguageChange>().lang.home;
+  String get setting => getIt<LanguageChange>().lang.settings;
 
   onLangClick({bool isEn = true}) {
     FireStoreService.getLanguage(docName: isEn ? Global.ENGLISH : Global.TAMIL).then((value) {

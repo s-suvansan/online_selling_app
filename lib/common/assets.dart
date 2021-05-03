@@ -14,6 +14,8 @@ const SMS = 'assets/images/svgs/sms.svg';
 const WHATSAPP = 'assets/images/svgs/whatsapp.svg';
 const EMPTY_BOX = 'assets/images/svgs/empty_box.svg';
 const EMPTY_MAN = 'assets/images/svgs/empty_man.svg';
+const ON = 'assets/images/svgs/on.svg';
+const OFF = 'assets/images/svgs/off.svg';
 
 //place holder image
 const NO_IMAGE =
@@ -22,6 +24,7 @@ const NO_IMAGE =
 // pngs
 const EMPTY_HEART = 'assets/images/pngs/empty_heart.png';
 const EMPTY_ASTRONAUT = 'assets/images/pngs/empty_astronaut.png';
+const NO_NET = 'assets/images/pngs/no_net.png';
 
 // app logo png
 const APP_LOGO = 'assets/images/pngs/app_logo.png';

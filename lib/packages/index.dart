@@ -15,3 +15,4 @@ export 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter/services.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:flutter/rendering.dart';
+export 'package:stacked_hooks/stacked_hooks.dart';
