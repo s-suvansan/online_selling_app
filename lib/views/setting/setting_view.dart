@@ -56,24 +56,18 @@ class SettingView extends StatelessWidget {
                           text: "Change Theme",
                           color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
                         ),
-                        Container(
-                          child: App.svgImage(
-                            svg: getIt<ThemeChange>().isDark ? OFF : ON,
-                          ),
-                        ),
-                        RaisedButton(
-                          child: BrandTexts.header(text: "ok"),
-                          onPressed: () => model.onClick(),
-                        ),
+                        SizedBox(height: 16.0),
+                        _ThemeBox(),
+                        SizedBox(height: 16.0),
                         Row(
                           children: [
                             RaisedButton(
                               child: BrandTexts.header(text: "en"),
-                              onPressed: () => model.onLangClick(),
+                              onPressed: () => model.onLangClick(languageCode: Lang.English.code),
                             ),
                             RaisedButton(
                               child: BrandTexts.header(text: "ta"),
-                              onPressed: () => model.onLangClick(isEn: false),
+                              onPressed: () => model.onLangClick(languageCode: Lang.Tamil.code),
                             ),
                           ],
                         ),
@@ -84,5 +78,58 @@ class SettingView extends StatelessWidget {
               ),
             ),
         viewModelBuilder: () => SettingViewModel());
+  }
+}
+
+class _ThemeBox extends ViewModelWidget<SettingViewModel> {
+  @override
+  Widget build(BuildContext context, SettingViewModel model) {
+    return Consumer<ThemeChange>(builder: (context, value, child) {
+      return Container(
+        height: 120.0,
+        decoration: BoxDecoration(
+          border: Border.all(color: BrandColors.shadowDark),
+          borderRadius: BorderRadius.circular(16.0),
+          color: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.candleLight.withOpacity(0.2),
+        ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Positioned(
+              bottom: -App.getDeviceHight(context) * 0.1,
+              right: 0,
+              left: 0,
+              // height: 250,
+              height: App.getDeviceHight(context) * 0.32,
+              // width: 200,
+              child: Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: RadialGradient(colors: [
+                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.candleLight.withOpacity(0.5),
+                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.candleLight.withOpacity(0.2),
+                    ])),
+              ),
+            ),
+            Positioned(
+              height: 50.0,
+              bottom: 0,
+              right: 0,
+              left: 0,
+              child: Container(
+                height: 50.0,
+                width: 50.0,
+                child: GestureDetector(
+                  onTap: () => model.onClick(),
+                  child: App.svgImage(
+                    svg: getIt<ThemeChange>().isDark ? OFF : ON,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

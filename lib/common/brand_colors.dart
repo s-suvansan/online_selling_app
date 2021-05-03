@@ -43,4 +43,7 @@ class BrandColors {
   static Color darkBlue2 = Color(0xFF192734);
   static Color darkBlue3 = Color(0xFF22303C);
   static Color grayBlue = Color(0xFF8899A6);
+
+  // candel light ffc261
+  static Color candleLight = Color(0xFFFFC261);
 }

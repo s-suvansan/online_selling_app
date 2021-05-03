@@ -62,7 +62,7 @@ class ProductInfoViewModel extends BaseViewModel {
           print("Could not launch $_url");
           App.showInfoBar(
             context,
-            msg: "Could not launch",
+            msg: "${getIt<LanguageChange>().lang.sorryCouldnotOpen}",
             bgColor: BrandColors.dangers,
           );
         }

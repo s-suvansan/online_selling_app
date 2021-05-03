@@ -35,7 +35,7 @@ class _AppBar extends ViewModelWidget<ProductInfoViewModel> implements Preferred
   @override
   Widget build(BuildContext context, ProductInfoViewModel model) {
     return CommonAppBar(
-      title: "Product Info",
+      title: "${getIt<LanguageChange>().lang.productInfo}",
       isShowLike: true,
       docId: model.product.id ?? "",
     );
@@ -163,7 +163,10 @@ class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
           SizedBox(height: 8.0),
           // posted time
           BrandTexts.caption(
-            text: "Posted at ${App.showDateTimeInFormat(model.product.postAt, format: DateTimeFormat.DateAndTime)}",
+            text: getIt<LanguageChange>()
+                .lang
+                .postedAt
+                .replaceFirst("{}", "${App.showDateTimeInFormat(model.product.postAt, format: DateTimeFormat.DateAndTime)}"),
             color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark,
           ),
           if (model.product.postBy != "") SizedBox(height: 8.0),
@@ -172,13 +175,13 @@ class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
             Row(
               children: [
                 BrandTexts.caption(
-                  text: "Posted by ${model.product.postBy}",
+                  text: getIt<LanguageChange>().lang.postedBy.replaceFirst("{}", "${model.product.postBy}"),
                   color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark,
                 ),
-                BrandTexts.caption(
+                /*   BrandTexts.caption(
                   text: ", ${model.product.postFrom} ",
                   color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadowDark,
-                ),
+                ), */
               ],
             ),
 
@@ -200,7 +203,7 @@ class _ContentView extends ViewModelWidget<ProductInfoViewModel> {
               SizedBox(width: 8.0),
               if (model.product.isNegotiable)
                 BrandTexts.subTitleBold(
-                  text: "Negotiable",
+                  text: "${getIt<LanguageChange>().lang.negotiable}",
                   fontStyle: FontStyle.italic,
                   color: getIt<ThemeChange>().isDark ? BrandColors.dark5.withOpacity(0.5) : BrandColors.shadow,
                 )
@@ -229,7 +232,7 @@ class _DescView extends ViewModelWidget<ProductInfoViewModel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BrandTexts.titleBold(
-            text: "Description",
+            text: "${getIt<LanguageChange>().lang.desc}",
             color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
           ),
           SizedBox(height: 8.0),
@@ -266,7 +269,9 @@ class _DescView extends ViewModelWidget<ProductInfoViewModel> {
                           size: 26.0,
                         ),
                         BrandTexts.subTitleBold(
-                          text: model.showMore ? "Show less" : "Show more",
+                          text: model.showMore
+                              ? "${getIt<LanguageChange>().lang.showLess}"
+                              : "${getIt<LanguageChange>().lang.showMore}",
                           color: getIt<ThemeChange>().isDark ? BrandColors.dark5 : BrandColors.shadow,
                           textAlign: TextAlign.center,
                         ),
@@ -303,7 +308,7 @@ class _BottomCallButton extends ViewModelWidget<ProductInfoViewModel> {
                 children: [
                   App.svgImage(svg: CALL, height: 18.0, color: BrandColors.light),
                   SizedBox(width: 8.0),
-                  BrandTexts.titleBold(text: "Call", color: BrandColors.light, fontSize: 18.0),
+                  BrandTexts.titleBold(text: "${getIt<LanguageChange>().lang.call}", color: BrandColors.light, fontSize: 18.0),
                 ],
               ),
             ),
@@ -322,7 +327,8 @@ class _BottomCallButton extends ViewModelWidget<ProductInfoViewModel> {
                 children: [
                   App.svgImage(svg: WHATSAPP, height: 22.0, color: BrandColors.light),
                   SizedBox(width: 8.0),
-                  BrandTexts.titleBold(text: "WhatsApp", color: BrandColors.light, fontSize: 18.0),
+                  BrandTexts.titleBold(
+                      text: "${getIt<LanguageChange>().lang.whatsapp}", color: BrandColors.light, fontSize: 18.0),
                 ],
               ),
             ),
