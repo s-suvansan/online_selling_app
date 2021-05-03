@@ -1,3 +1,6 @@
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:stacked_hooks/stacked_hooks.dart';
+
 import '../../main_index.dart';
 
 class BaseLayoutView extends StatelessWidget {
@@ -14,7 +17,6 @@ class BaseLayoutView extends StatelessWidget {
                 // bottomNavigationBar: _BottomBar(),
                 floatingActionButton: _BottomBar(),
                 floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-                floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
               ),
             ),
         onModelReady: (model) => model.onInit(),
@@ -111,7 +113,7 @@ class _ShowHidePart extends ViewModelWidget<BaseLayoutViewModel> {
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
     return AnimatedOpacity(
-      opacity: model.lastIndex == pageIndex ? 1.0 : 00,
+      opacity: model.lastIndex == pageIndex ? 1.0 : 0.0,
       duration: Duration(milliseconds: 300),
       child: Offstage(
         offstage: model.lastIndex != pageIndex,
@@ -122,16 +124,16 @@ class _ShowHidePart extends ViewModelWidget<BaseLayoutViewModel> {
 }
 
 // bottom navigation bar
-class _BottomBar extends ViewModelWidget<BaseLayoutViewModel> {
+class _BottomBar extends HookViewModelWidget<BaseLayoutViewModel> {
   const _BottomBar({Key key}) : super(key: key, reactive: true);
-
   @override
-  Widget build(BuildContext context, BaseLayoutViewModel model) {
+  Widget buildViewModelWidget(BuildContext context, BaseLayoutViewModel model) {
+    var _hide = useAnimationController(duration: Duration(milliseconds: 300), initialValue: 1);
+    model.setContoller = _hide;
     return Consumer<LanguageChange>(builder: (context, value, child) {
-      return Visibility(
-        maintainState: true,
-        maintainAnimation: true,
-        visible: !model.isHideBottomBar,
+      return SizeTransition(
+        sizeFactor: model.hide,
+        axisAlignment: -1.0,
         child: BottomNavigationBar(
           currentIndex: model.currentIndex,
           onTap: (int index) => model.chageTaps(index, context: context),

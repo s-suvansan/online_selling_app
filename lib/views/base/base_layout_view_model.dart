@@ -7,6 +7,7 @@ class BaseLayoutViewModel extends BaseViewModel {
   int _currentIndex = 0;
   int _lastIndex = 0;
   bool _isHideBottomBar = false;
+  AnimationController _hide;
 
   List<BottomTaps> _bottomTaps = [
     BottomTaps(index: 0, icon: HOME, filledIcon: HOME_FILL, title: "Home"),
@@ -15,6 +16,7 @@ class BaseLayoutViewModel extends BaseViewModel {
   ];
 
   //getter
+  AnimationController get hide => _hide;
   int get currentIndex => _currentIndex;
   int get lastIndex => _lastIndex;
   bool get isHideBottomBar => _isHideBottomBar;
@@ -24,6 +26,9 @@ class BaseLayoutViewModel extends BaseViewModel {
         getIt<LanguageChange>().lang.favourites,
         getIt<LanguageChange>().lang.settings,
       ];
+
+  // setter
+  set setContoller(AnimationController val) => _hide = val;
 
   // init function
   onInit() {
@@ -62,19 +67,16 @@ class BaseLayoutViewModel extends BaseViewModel {
         final UserScrollNotification userScroll = notification;
         switch (userScroll.direction) {
           case ScrollDirection.forward:
-            print("unhide");
-            _isHideBottomBar = false;
-            notifyListeners();
+            // print("unhide");
+            _hide.forward();
             break;
           case ScrollDirection.reverse:
-            print("hide");
-            _isHideBottomBar = true;
-            notifyListeners();
+            // print("hide");
+            _hide.reverse();
             break;
           case ScrollDirection.idle:
-            print("stable");
-            _isHideBottomBar = false;
-            notifyListeners();
+            // print("stable");
+            _hide.forward();
             break;
         }
       }
