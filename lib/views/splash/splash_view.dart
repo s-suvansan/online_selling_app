@@ -47,14 +47,14 @@ class _NoInternet extends ViewModelWidget<SplashViewModel> {
           height: 200.0,
           width: 200.0,
         ),
-        BrandTexts.titleBold(text: "No Internet Connection.", color: BrandColors.shadowDark),
+        BrandTexts.titleBold(text: "${getIt<LanguageChange>().lang.noNetConnection}", color: BrandColors.shadowDark),
         SizedBox(height: 20.0),
         OutlineButton(
           onPressed: () => model.checkConnection(context),
           color: BrandColors.brandColorDark,
           hoverColor: BrandColors.brandColorLight,
           borderSide: BorderSide(color: BrandColors.brandColorDark, style: BorderStyle.solid, width: 2),
-          child: BrandTexts.titleBold(text: "Retry"),
+          child: BrandTexts.titleBold(text: "${getIt<LanguageChange>().lang.retry}"),
         )
       ],
     );

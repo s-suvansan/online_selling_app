@@ -17,7 +17,9 @@ class SettingView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16.0),
                         boxShadow: [
                           BoxShadow(
-                            color: BrandColors.dark.withOpacity(0.5),
+                            color: getIt<ThemeChange>().isDark
+                                ? BrandColors.light.withOpacity(0.2)
+                                : BrandColors.dark.withOpacity(0.2),
                             spreadRadius: 1.0,
                             offset: Offset.zero,
                             blurRadius: 3.0,
@@ -53,24 +55,19 @@ class SettingView extends StatelessWidget {
                         ),
                         SizedBox(height: 16.0),
                         BrandTexts.titleBold(
-                          text: "Change Theme",
+                          text: "${getIt<LanguageChange>().lang.changeTheme}",
                           color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
                         ),
                         SizedBox(height: 16.0),
                         _ThemeBox(),
                         SizedBox(height: 16.0),
-                        Row(
-                          children: [
-                            RaisedButton(
-                              child: BrandTexts.header(text: "en"),
-                              onPressed: () => model.onLangClick(languageCode: Lang.English.code),
-                            ),
-                            RaisedButton(
-                              child: BrandTexts.header(text: "ta"),
-                              onPressed: () => model.onLangClick(languageCode: Lang.Tamil.code),
-                            ),
-                          ],
+                        BrandTexts.titleBold(
+                          text: "${getIt<LanguageChange>().lang.changeTheme}",
+                          color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
                         ),
+                        SizedBox(height: 16.0),
+                        _LanguageBox(),
+                        SizedBox(height: 16.0),
                       ],
                     ),
                   ),
@@ -82,6 +79,7 @@ class SettingView extends StatelessWidget {
 }
 
 class _ThemeBox extends ViewModelWidget<SettingViewModel> {
+  const _ThemeBox() : super(reactive: false);
   @override
   Widget build(BuildContext context, SettingViewModel model) {
     return Consumer<ThemeChange>(builder: (context, value, child) {
@@ -128,6 +126,61 @@ class _ThemeBox extends ViewModelWidget<SettingViewModel> {
               ),
             ),
           ],
+        ),
+      );
+    });
+  }
+}
+
+class _LanguageBox extends ViewModelWidget<SettingViewModel> {
+  const _LanguageBox() : super(reactive: false);
+  @override
+  Widget build(BuildContext context, SettingViewModel model) {
+    return Consumer<ThemeChange>(builder: (context, value, child) {
+      return Container(
+        child: Wrap(
+          spacing: 8.0,
+          runSpacing: 8.0,
+          children: [
+            _chip(
+              onTap: () => model.onLangClick(languageCode: Lang.English.code),
+              languageCode: Lang.English.code,
+            ),
+            _chip(
+              lang: "தமிழ்",
+              onTap: () => model.onLangClick(languageCode: Lang.Tamil.code),
+              languageCode: Lang.Tamil.code,
+            ),
+            _chip(
+              lang: "தமிழ்",
+              // onTap: () => model.onLangClick(languageCode: Lang.Tamil.code),
+              // languageCode: Lang.Tamil.code,
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget _chip({String lang = "English", String languageCode = "", Function onTap}) {
+    return Consumer<LanguageChange>(builder: (context, value, child) {
+      return GestureDetector(
+        onTap: onTap,
+        child: Container(
+          // height: 40.0,
+          padding: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 2.0,
+              color: getIt<LanguageChange>().languageCode == languageCode ? BrandColors.brandColor : BrandColors.shadow,
+            ),
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          // alignment: Alignment.center,
+          child: BrandTexts.titleBold(
+            text: lang,
+            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadowDark,
+          ),
         ),
       );
     });

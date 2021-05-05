@@ -2,7 +2,7 @@ class LanguageModel {
   LanguageModel({
     //base layout view
     this.home = "Home",
-    this.favourites = "Favourites",
+    this.favourites = "Favorites",
     this.settings = "Settings",
     // home and favourite view
     this.min = "min",
@@ -29,6 +29,14 @@ class LanguageModel {
     this.call = "Call",
     this.whatsapp = "WhatsApp",
     this.sorryCouldnotOpen = "Sorry, could not open.",
+    this.emptyProductList = "Empty products.",
+    this.emptyFavList = "Empty favorite products.",
+    //splash view
+    this.noNetConnection = "No Internet Connection.",
+    this.retry = "Retry",
+    //setting view
+    this.changeTheme = "Change Theme",
+    this.selectLang = "Select Language",
   });
   //base layout view
   String home;
@@ -48,6 +56,8 @@ class LanguageModel {
   String ago;
   String rs;
   String justNow;
+  String emptyProductList;
+  String emptyFavList;
   // product info view
   String productInfo;
   String postedAt;
@@ -59,11 +69,17 @@ class LanguageModel {
   String call;
   String whatsapp;
   String sorryCouldnotOpen;
+  //splash view
+  String noNetConnection;
+  String retry;
+  //setting view
+  String changeTheme;
+  String selectLang;
 
   factory LanguageModel.fromJson(Map<String, dynamic> json) => LanguageModel(
         //base layout view
         home: json["home"] ?? "Home",
-        favourites: json["fav"] ?? "Favourites",
+        favourites: json["fav"] ?? "Favorites",
         settings: json["settings"] ?? "Settings",
         // home and favourite view
         min: json["min"] ?? "min",
@@ -79,6 +95,8 @@ class LanguageModel {
         ago: json["ago"] ?? "ago",
         rs: json["rs"] ?? "Rs",
         justNow: json["justNow"] ?? "Just now",
+        emptyProductList: json["emptyProductList"] ?? "Empty products.",
+        emptyFavList: json["emptyFavList"] ?? "Empty favorite products.",
         // product info view
         productInfo: json["productInfo"] ?? "Product Info",
         postedAt: json["postedAt"] ?? "Posted at {}",
@@ -90,5 +108,46 @@ class LanguageModel {
         call: json["call"] ?? "Call",
         whatsapp: json["whatsapp"] ?? "WhatsApp",
         sorryCouldnotOpen: json["sorryCouldnotOpen"] ?? "Sorry, could not open.",
+        //splash view
+        noNetConnection: json["noNetConnection"] ?? "No Internet Connection.",
+        retry: json["retry"] ?? "Retry",
+        //setting view
+        changeTheme: json["changeTheme"] ?? "Change Theme",
+        selectLang: json["selectLang"] ?? "Select Language",
       );
+
+  Map<String, dynamic> toJson() => {
+        "home": home,
+        "favourites": favourites,
+        "settings": settings,
+        "min": min,
+        "mins": mins,
+        "hr": hr,
+        "hrs": hrs,
+        "day": day,
+        "days": days,
+        "month": month,
+        "months": months,
+        "year": year,
+        "years": years,
+        "ago": ago,
+        "rs": rs,
+        "justNow": justNow,
+        "emptyProductList": emptyProductList,
+        "emptyFavList": emptyFavList,
+        "productInfo": productInfo,
+        "postedAt": postedAt,
+        "postedBy": postedBy,
+        "negotiable": negotiable,
+        "desc": desc,
+        "showMore": showMore,
+        "showLess": showLess,
+        "call": call,
+        "whatsapp": whatsapp,
+        "sorryCouldnotOpen": sorryCouldnotOpen,
+        "noNetConnection": noNetConnection,
+        "retry": retry,
+        "changeTheme": changeTheme,
+        "selectLang": selectLang,
+      };
 }

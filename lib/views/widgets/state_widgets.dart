@@ -39,7 +39,7 @@ class Empty extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             BrandTexts.titleBold(
-              text: "Empty favourite list.",
+              text: text,
               fontSize: 18.0,
               fontWeight: BrandTexts.black,
               color: getIt<ThemeChange>().isDark ? BrandColors.shadowLight : BrandColors.shadowDark,

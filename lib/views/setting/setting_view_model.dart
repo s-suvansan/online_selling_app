@@ -11,6 +11,7 @@ class SettingViewModel extends BaseViewModel {
   onLangClick({@required String languageCode}) {
     FireStoreService.getLanguage(docName: languageCode == Lang.English.code ? Global.ENGLISH : Global.TAMIL).then((value) {
       if (value != null) {
+        print(value.toJson());
         getIt<LanguageChange>().setLanguage(value);
         getIt<LanguageChange>().setLanguageCode = languageCode;
       }
