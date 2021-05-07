@@ -10,6 +10,8 @@ class App {
   // shareprefrence key const
   static const IS_DARK = 'is_dark';
   static const USER_ID = 'user_id';
+  static const LANG = 'language';
+  static const LANG_CODE = 'language_code';
 
   //Get the devie Hight
   static double getDeviceHight(BuildContext context) {
@@ -282,6 +284,32 @@ class App {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String value = prefs.getString(USER_ID);
     return value ?? "";
+  }
+
+  //for save value into sharedPreferences for set language code
+  static setLangCode({@required String value}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(LANG_CODE, value ?? Lang.English.code);
+  }
+
+  // for get value from the sharedPreferences for get language code
+  static Future<String> getLangCode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String value = prefs.getString(LANG_CODE);
+    return value ?? Lang.English.code;
+  }
+
+  //for save value into sharedPreferences for set language
+  static setLang({@required String value}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(LANG, value ?? json.encode(getIt<LanguageChange>().lang));
+  }
+
+  // for get value from the sharedPreferences for get language
+  static Future<String> getLang() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String value = prefs.getString(LANG);
+    return value ?? json.encode(getIt<LanguageChange>().lang);
   }
 
   //cache the network images

@@ -23,7 +23,7 @@ class BaseLayoutViewModel extends BaseViewModel {
   List<BottomTaps> get bottomTaps => _bottomTaps;
   List<String> get bottomTapTexts => [
         getIt<LanguageChange>().lang.home,
-        getIt<LanguageChange>().lang.favourites,
+        getIt<LanguageChange>().lang.favorites,
         getIt<LanguageChange>().lang.settings,
       ];
 
@@ -40,7 +40,6 @@ class BaseLayoutViewModel extends BaseViewModel {
       if (_currentIndex != index) {
         _currentIndex = index;
         _lastIndex = index;
-
         notifyListeners();
       }
     } else {

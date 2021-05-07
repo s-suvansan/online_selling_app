@@ -69,4 +69,8 @@ class ProductInfoViewModel extends BaseViewModel {
       });
     }
   }
+
+  openFullImageView(BuildContext context) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => ImageViewer(images: _product.imageUrl)));
+  }
 }

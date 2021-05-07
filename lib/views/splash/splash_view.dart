@@ -22,10 +22,12 @@ class _Body extends ViewModelWidget<SplashViewModel> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         !model.isNoInternet
-            ? Image.asset(
-                APP_LOGO,
-                height: 150,
-                width: 150,
+            ? Container(
+                child: Image.asset(
+                  APP_LOGO,
+                  height: 150,
+                  width: 150,
+                ),
               )
             : _NoInternet(),
       ],
@@ -42,11 +44,15 @@ class _NoInternet extends ViewModelWidget<SplashViewModel> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          NO_NET,
-          height: 200.0,
-          width: 200.0,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(80.0),
+          child: Image.asset(
+            NO_INRETNET,
+            height: 160.0,
+            width: 160.0,
+          ),
         ),
+        SizedBox(height: 20.0),
         BrandTexts.titleBold(text: "${getIt<LanguageChange>().lang.noNetConnection}", color: BrandColors.shadowDark),
         SizedBox(height: 20.0),
         OutlineButton(

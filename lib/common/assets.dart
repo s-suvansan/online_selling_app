@@ -25,6 +25,8 @@ const NO_IMAGE =
 const EMPTY_HEART = 'assets/images/pngs/empty_heart.png';
 const EMPTY_ASTRONAUT = 'assets/images/pngs/empty_astronaut.png';
 const NO_NET = 'assets/images/pngs/no_net.png';
+const EMPTY_VELU = 'assets/images/pngs/empty_velu.png';
+const NO_INRETNET = 'assets/images/pngs/no_internet.png';
 
 // app logo png
 const APP_LOGO = 'assets/images/pngs/app_logo.png';

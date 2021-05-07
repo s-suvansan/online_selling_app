@@ -3,6 +3,7 @@ import '../main_index.dart';
 class BrandTexts {
   // brand font
   static String brandFont = "LatoBlack";
+  static String logoFont = "OriginalSurfer";
   static String tamilFont = "Bamini";
 
   // font weights
@@ -156,6 +157,7 @@ class BrandTexts {
     double fontSize = 18.0,
     double letterSpacing = 0.2,
     FontStyle fontStyle = FontStyle.normal,
+    String fontFamily,
   }) {
     return Text(
       text,
@@ -168,6 +170,7 @@ class BrandTexts {
         fontWeight: fontWeight ?? regular,
         letterSpacing: letterSpacing,
         fontStyle: fontStyle,
+        fontFamily: fontFamily,
       ),
     );
   }
@@ -180,9 +183,10 @@ class BrandTexts {
     bool isCrossText = false,
     double letterSpacing = 0.2,
     FontStyle fontStyle = FontStyle.normal,
+    String fontFamily,
   }) =>
       TextStyle(
-          fontFamily: /* getIt<LanguageChange>().languageCode == Lang.Tamil.code ? tamilFont : */ brandFont,
+          fontFamily: fontFamily ?? brandFont,
           fontStyle: fontStyle,
           fontSize: fontSize,
           fontWeight: fontWeight ?? regular,

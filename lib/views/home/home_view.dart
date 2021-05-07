@@ -56,7 +56,6 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                         ),
                       )
                     : Empty(
-                        text: getIt<LanguageChange>().lang.emptyProductList.toString(),
                         size: 150.0,
                         moveFromTopBy: 180.0,
                       )

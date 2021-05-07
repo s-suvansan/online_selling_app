@@ -2,7 +2,7 @@ class LanguageModel {
   LanguageModel({
     //base layout view
     this.home = "Home",
-    this.favourites = "Favorites",
+    this.favorites = "Favorites",
     this.settings = "Settings",
     // home and favourite view
     this.min = "min",
@@ -40,7 +40,7 @@ class LanguageModel {
   });
   //base layout view
   String home;
-  String favourites;
+  String favorites;
   String settings;
   // home and favourite view
   String min;
@@ -79,7 +79,7 @@ class LanguageModel {
   factory LanguageModel.fromJson(Map<String, dynamic> json) => LanguageModel(
         //base layout view
         home: json["home"] ?? "Home",
-        favourites: json["fav"] ?? "Favorites",
+        favorites: json["favorites"] ?? "Favorites",
         settings: json["settings"] ?? "Settings",
         // home and favourite view
         min: json["min"] ?? "min",
@@ -118,7 +118,7 @@ class LanguageModel {
 
   Map<String, dynamic> toJson() => {
         "home": home,
-        "favourites": favourites,
+        "favorites": favorites,
         "settings": settings,
         "min": min,
         "mins": mins,

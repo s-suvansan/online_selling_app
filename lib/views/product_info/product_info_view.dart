@@ -59,9 +59,12 @@ class _TopImagesView extends ViewModelWidget<ProductInfoViewModel> {
               controller: model.pageController,
               itemCount: model.product.imageUrl?.length,
               itemBuilder: (context, index) {
-                return App.cacheImage(
-                  model.product.imageUrl[index],
-                  fit: BoxFit.contain,
+                return GestureDetector(
+                  onTap: () => model.openFullImageView(context),
+                  child: App.cacheImage(
+                    model.product.imageUrl[index],
+                    fit: BoxFit.contain,
+                  ),
                 );
               },
               onPageChanged: (currentIndex) => model.onImageChange(index: currentIndex),

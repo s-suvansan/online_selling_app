@@ -51,7 +51,7 @@ class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
                         image: EMPTY_MAN,
                         size: 150.0,
                         moveFromTopBy: 180.0,
-                        text: getIt<LanguageChange>().lang.emptyFavList.toString(),
+                        isFav: true,
                       )
                 : Center(
                     child: Loading(

@@ -30,25 +30,19 @@ class _AppBar extends ViewModelWidget<BaseLayoutViewModel> implements PreferredS
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
     return Consumer<ThemeChange>(builder: (_, __, ___) {
-      return AppBar(
-        centerTitle: true,
-        backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
-        elevation: 0.0,
-        title: ShaderMask(
-          blendMode: BlendMode.srcIn,
-          shaderCallback: (Rect bounds) => LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            tileMode: TileMode.repeated,
-            colors: [BrandColors.brandColorDark, getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark],
-          ).createShader(bounds),
-          child: BrandTexts.header(
-            text: Global.APP_NAME,
-            fontSize: 24.0,
-            fontWeight: BrandTexts.black,
-          ),
-        ),
-      );
+      return Consumer<LanguageChange>(builder: (_, __, ___) {
+        return AppBar(
+          centerTitle: true,
+          backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
+          elevation: 0.0,
+          title: BrandTexts.commonText(
+              text: Global.APP_NAME,
+              fontSize: 24.0,
+              fontWeight: BrandTexts.black,
+              fontFamily: BrandTexts.logoFont,
+              color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark),
+        );
+      });
     });
   }
 

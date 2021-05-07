@@ -55,14 +55,17 @@ dependencies:
   # shared prefrence
   shared_preferences: ^0.5.12+4
 
-  # get it
+  # get it - state management
   get_it: ^5.0.3
 
   # caches network images
   cached_network_image: ^2.5.1
 
-  # connectivity
+  # connectivity check network
   connectivity: ^2.0.2
+
+  # for enlarge image
+  photo_view: ^0.10.3
 
 dev_dependencies:
   flutter_test:
@@ -126,6 +129,9 @@ flutter:
     - family: Bamini
       fonts:
         - asset: assets/fonts/Bamini.ttf
+    - family: OriginalSurfer
+      fonts:
+        - asset: assets/fonts/OriginalSurfer-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

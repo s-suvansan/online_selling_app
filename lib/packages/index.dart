@@ -16,3 +16,6 @@ export 'package:flutter/services.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:flutter/rendering.dart';
 export 'package:stacked_hooks/stacked_hooks.dart';
+export 'dart:convert';
+export 'package:photo_view/photo_view.dart';
+export 'package:photo_view/photo_view_gallery.dart';

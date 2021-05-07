@@ -1,7 +1,7 @@
 import '../main_index.dart';
 
 class Global {
-  static const String APP_NAME = "SNS";
+  static const String APP_NAME = "SNS Beatz";
 
   // firestore collection and feild name
   static const String PRODUCTS = "products";

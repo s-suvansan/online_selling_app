@@ -6,6 +6,8 @@ void main() async {
 
   setup();
   getIt<ThemeChange>().setIsDark = await App.getIsDark();
+  getIt<LanguageChange>().setLanguageCode = await App.getLangCode();
+  getIt<LanguageChange>().setLanguageInMain(await App.getLang());
   runApp(
     MultiProvider(
       providers: [

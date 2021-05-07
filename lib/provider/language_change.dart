@@ -17,4 +17,11 @@ class LanguageChange with ChangeNotifier {
     _lang = val;
     notifyListeners();
   }
+
+  // set language function from main
+  void setLanguageInMain(String val) {
+    // print(jsonEncode(val));
+    Map _map = jsonDecode(val);
+    _lang = LanguageModel.fromJson(_map);
+  }
 }

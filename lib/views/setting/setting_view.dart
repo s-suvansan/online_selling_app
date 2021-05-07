@@ -56,13 +56,16 @@ class SettingView extends StatelessWidget {
                         SizedBox(height: 16.0),
                         BrandTexts.titleBold(
                           text: "${getIt<LanguageChange>().lang.changeTheme}",
+                          fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
                           color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
                         ),
                         SizedBox(height: 16.0),
                         _ThemeBox(),
                         SizedBox(height: 16.0),
                         BrandTexts.titleBold(
-                          text: "${getIt<LanguageChange>().lang.changeTheme}",
+                          text: "${getIt<LanguageChange>().lang.selectLang}",
+                          maxLines: 2,
+                          fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
                           color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
                         ),
                         SizedBox(height: 16.0),
@@ -143,19 +146,19 @@ class _LanguageBox extends ViewModelWidget<SettingViewModel> {
           runSpacing: 8.0,
           children: [
             _chip(
-              onTap: () => model.onLangClick(languageCode: Lang.English.code),
-              languageCode: Lang.English.code,
-            ),
-            _chip(
               lang: "தமிழ்",
               onTap: () => model.onLangClick(languageCode: Lang.Tamil.code),
               languageCode: Lang.Tamil.code,
             ),
             _chip(
-              lang: "தமிழ்",
-              // onTap: () => model.onLangClick(languageCode: Lang.Tamil.code),
-              // languageCode: Lang.Tamil.code,
+              onTap: () => model.onLangClick(languageCode: Lang.English.code),
+              languageCode: Lang.English.code,
             ),
+            // _chip(
+            //   lang: "தமிழ்",
+            // onTap: () => model.onLangClick(languageCode: Lang.Tamil.code),
+            // languageCode: Lang.Tamil.code,
+            // ),
           ],
         ),
       );
