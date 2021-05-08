@@ -19,6 +19,7 @@ class SplashViewModel extends BaseViewModel {
   void checkConnection(BuildContext context) {
     Connectivity().checkConnectivity().then((result) {
       if (result != ConnectivityResult.none) {
+        getPhoneNumbers();
         checkUserLogin(context);
       } else {
         print("no internet connection here");
@@ -40,6 +41,15 @@ class SplashViewModel extends BaseViewModel {
           Global.userInfo = user;
           navigateToBaseLayoutView(context);
         });
+      }
+    });
+  }
+
+  //get phone numbers
+  void getPhoneNumbers() {
+    FireStoreService.getPhoneNumbers().then((value) {
+      if (value != null) {
+        Global.phoneNumberModel = value;
       }
     });
   }

@@ -54,4 +54,13 @@ class FireStoreService {
   }
   /* .catchError(
           (onError) => print("onErronFuck ${onError.toString()}"), */
+
+  //get phone numbers
+  static Future<PhoneNumberModel> getPhoneNumbers() async {
+    DocumentSnapshot doc = await Firestore.instance.collection(Global.PHONE_NUMBER).document(Global.NUMBERS).get();
+    if (doc != null && doc.data != null) {
+      return PhoneNumberModel.fromJson(doc.data);
+    }
+    return null;
+  }
 }

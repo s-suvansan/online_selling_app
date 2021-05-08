@@ -37,6 +37,7 @@ class LanguageModel {
     //setting view
     this.changeTheme = "Change Theme",
     this.selectLang = "Select Language",
+    this.selectNumber = "Select a number",
   });
   //base layout view
   String home;
@@ -69,6 +70,8 @@ class LanguageModel {
   String call;
   String whatsapp;
   String sorryCouldnotOpen;
+  String selectNumber;
+
   //splash view
   String noNetConnection;
   String retry;
@@ -108,6 +111,7 @@ class LanguageModel {
         call: json["call"] ?? "Call",
         whatsapp: json["whatsapp"] ?? "WhatsApp",
         sorryCouldnotOpen: json["sorryCouldnotOpen"] ?? "Sorry, could not open.",
+        selectNumber: json["selectNumber"] ?? "Select a number",
         //splash view
         noNetConnection: json["noNetConnection"] ?? "No Internet Connection.",
         retry: json["retry"] ?? "Retry",
@@ -145,6 +149,7 @@ class LanguageModel {
         "call": call,
         "whatsapp": whatsapp,
         "sorryCouldnotOpen": sorryCouldnotOpen,
+        "selectNumber": selectNumber,
         "noNetConnection": noNetConnection,
         "retry": retry,
         "changeTheme": changeTheme,

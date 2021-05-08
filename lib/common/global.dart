@@ -15,4 +15,11 @@ class Global {
   static const String LANGUAGE = "languages";
   static const String TAMIL = "tamil";
   static const String ENGLISH = "english";
+
+  //phone number related
+  static const String PHONE_NUMBER = "phoneNumbers";
+  static const String NUMBERS = "numbers";
+
+  // phone numbers
+  static PhoneNumberModel phoneNumberModel = PhoneNumberModel();
 }
