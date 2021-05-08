@@ -56,6 +56,8 @@ class SplashViewModel extends BaseViewModel {
 
   // navigate to base layout view
   void navigateToBaseLayoutView(BuildContext context) {
-    Navigator.popAndPushNamed(context, BaseLayoutView.routeName);
+    Future.delayed(Duration(milliseconds: 2000)).then((value) {
+      Navigator.popAndPushNamed(context, BaseLayoutView.routeName);
+    });
   }
 }

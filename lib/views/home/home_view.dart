@@ -19,55 +19,57 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel model) {
-    return Container(
-      child: StreamBuilder<QuerySnapshot>(
-          stream: FireStoreService.getProducts(),
-          builder: (context, snapshot) {
-            model.getProductDetails(snapshot);
-            return !model.isLoading
-                ? model.product.isNotEmpty
-                    ? Container(
-                        margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(24.0),
-                            topRight: Radius.circular(24.0),
+    return Consumer<ScrollChange>(builder: (_, value, ___) {
+      return Container(
+        child: StreamBuilder<QuerySnapshot>(
+            stream: FireStoreService.getProducts(limit: value.count),
+            builder: (context, snapshot) {
+              model.getProductDetails(snapshot);
+              return !model.isLoading
+                  ? model.product.isNotEmpty
+                      ? Container(
+                          margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(24.0),
+                              topRight: Radius.circular(24.0),
+                            ),
                           ),
-                        ),
-                        child: StaggeredGridView.countBuilder(
-                          physics: BouncingScrollPhysics(),
-                          crossAxisCount: 2,
-                          itemCount: model.product.length,
-                          itemBuilder: (context, index) => GestureDetector(
-                            onTap: () => model.openProductInfo(
-                              context,
-                              ProductInfoView(
-                                productModel: model.product[index],
+                          child: StaggeredGridView.countBuilder(
+                            physics: BouncingScrollPhysics(),
+                            crossAxisCount: 2,
+                            itemCount: model.product.length,
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () => model.openProductInfo(
+                                context,
+                                ProductInfoView(
+                                  productModel: model.product[index],
+                                ),
+                              ),
+                              child: _ProductGridTile(
+                                key: UniqueKey(),
+                                index: index,
                               ),
                             ),
-                            child: _ProductGridTile(
-                              key: UniqueKey(),
-                              index: index,
-                            ),
+                            staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.4),
+                            crossAxisSpacing: 8.0,
+                            mainAxisSpacing: 8.0,
                           ),
-                          staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.4),
-                          crossAxisSpacing: 8.0,
-                          mainAxisSpacing: 8.0,
-                        ),
-                      )
-                    : Empty(
-                        size: 150.0,
-                        moveFromTopBy: 180.0,
-                      )
-                : Center(
-                    child: Loading(
-                      needBg: true,
-                      size: 20.0,
-                      bgSize: 40.0,
-                    ),
-                  );
-          }),
-    );
+                        )
+                      : Empty(
+                          size: 150.0,
+                          moveFromTopBy: 180.0,
+                        )
+                  : Center(
+                      child: Loading(
+                        needBg: true,
+                        size: 20.0,
+                        bgSize: 40.0,
+                      ),
+                    );
+            }),
+      );
+    });
   }
 }
 

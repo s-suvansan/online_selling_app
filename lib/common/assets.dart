@@ -22,9 +22,6 @@ const NO_IMAGE =
     "https://static.wixstatic.com/media/b8f3ba_3c742db44f224c6d83ffb803e54c8851~mv2.jpg/v1/fill/w_460,h_460,al_c,q_80,usm_0.66_1.00_0.01/picture-not-available.webp";
 
 // pngs
-const EMPTY_HEART = 'assets/images/pngs/empty_heart.png';
-const EMPTY_ASTRONAUT = 'assets/images/pngs/empty_astronaut.png';
-const NO_NET = 'assets/images/pngs/no_net.png';
 const EMPTY_VELU = 'assets/images/pngs/empty_velu.png';
 const NO_INRETNET = 'assets/images/pngs/no_internet.png';
 

@@ -75,7 +75,11 @@ class BaseLayoutViewModel extends BaseViewModel {
             break;
           case ScrollDirection.idle:
             // print("stable");
-            _hide.forward();
+            if (userScroll.metrics.atEdge && userScroll.metrics.pixels == userScroll.metrics.maxScrollExtent) {
+              print("at the bottom");
+              getIt<ScrollChange>().increseCount();
+            }
+            // _hide.forward();
             break;
         }
       }

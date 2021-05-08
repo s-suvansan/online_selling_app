@@ -25,8 +25,8 @@ class _Body extends ViewModelWidget<SplashViewModel> {
             ? Container(
                 child: Image.asset(
                   APP_LOGO,
-                  height: 150,
-                  width: 150,
+                  height: 120,
+                  width: 120,
                 ),
               )
             : _NoInternet(),

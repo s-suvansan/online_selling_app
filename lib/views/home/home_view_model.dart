@@ -19,6 +19,11 @@ class HomeViewModel extends BaseViewModel {
   void getProductDetails(AsyncSnapshot<QuerySnapshot> snapshot) {
     if (snapshot.hasData && snapshot.data.documents.length > 0) {
       _product = List<ProductModel>.from(snapshot.data.documents.map((x) => ProductModel.fromJson(x.data)));
+      if (_product.length < getIt<ScrollChange>().count) {
+        getIt<ScrollChange>().setIsNotify = false;
+      } else {
+        getIt<ScrollChange>().setIsNotify = true;
+      }
       _isLoading = false;
     }
   }

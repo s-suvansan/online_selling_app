@@ -17,6 +17,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (ctx) => getIt<LanguageChange>(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => getIt<ScrollChange>(),
+        ),
       ],
       child: Consumer<ThemeChange>(builder: (_, __, ___) {
         return Consumer<LanguageChange>(builder: (_, __, ___) {

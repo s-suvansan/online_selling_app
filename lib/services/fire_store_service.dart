@@ -2,8 +2,8 @@ import '../main_index.dart';
 
 class FireStoreService {
   // get product snapshot for stream build
-  static Stream<QuerySnapshot> getProducts() {
-    return Firestore.instance.collection(Global.PRODUCTS).orderBy(Global.POST_AT, descending: true).snapshots();
+  static Stream<QuerySnapshot> getProducts({int limit = 10}) {
+    return Firestore.instance.collection(Global.PRODUCTS).orderBy(Global.POST_AT, descending: true).limit(limit).snapshots();
   }
 
   // get user favourite product snapshot for stream build
