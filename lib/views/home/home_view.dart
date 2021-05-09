@@ -28,7 +28,7 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
               return !model.isLoading
                   ? model.product.isNotEmpty
                       ? Container(
-                          margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+                          margin: EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(24.0),
@@ -52,8 +52,8 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                               ),
                             ),
                             staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.4),
-                            crossAxisSpacing: 8.0,
-                            mainAxisSpacing: 8.0,
+                            crossAxisSpacing: 10.0,
+                            mainAxisSpacing: 10.0,
                           ),
                         )
                       : Empty(
@@ -114,7 +114,7 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
               return Consumer<LanguageChange>(builder: (context, value, child) {
                 return Container(
                   // height: 100.0,
-                  width: App.getDeviceWidth(context) * 0.47,
+                  width: App.getDeviceWidth(context) * 0.455,
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,

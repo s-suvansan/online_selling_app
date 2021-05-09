@@ -17,7 +17,7 @@ class _FavouriteList extends ViewModelWidget<BookmarkViewModel> {
   @override
   Widget build(BuildContext context, BookmarkViewModel model) {
     return Container(
-      margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+      margin: EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24.0),
