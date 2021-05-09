@@ -29,8 +29,14 @@ class _CommonAppBarState extends State<CommonAppBar> {
     super.initState();
     if (widget.isShowLike && widget.docId != "") {
       FireStoreService.isFavouriteProduct(docId: widget.docId).then((value) {
+        if (value) {
+          setState(() {
+            isLike = true;
+          });
+        }
+      }).catchError((e) {
         setState(() {
-          isLike = value;
+          isLike = false;
         });
       });
     }
@@ -75,19 +81,29 @@ class _CommonAppBarState extends State<CommonAppBar> {
   }
 
   void setLike() {
-    setLikeFirestore();
-    setState(() {
-      isLike = !isLike;
+    setLikeFirestore().then((value) {
+      if (value) {
+        setState(() {
+          isLike = !isLike;
+        });
+      }
     });
+
     // widget.onLike(isLike);
   }
 
   // function for like and unlike in firebase
-  void setLikeFirestore() {
+  Future<bool> setLikeFirestore() async {
+    bool _value = true;
     if (!isLike) {
-      FireStoreService.favouriteProduct(docId: widget.docId);
+      await FireStoreService.favouriteProduct(docId: widget.docId).then((favValue) {
+        _value = favValue;
+      });
     } else if (isLike) {
-      FireStoreService.unFavouriteProduct(docId: widget.docId);
+      await FireStoreService.unFavouriteProduct(docId: widget.docId).then((unFavValue) {
+        _value = unFavValue;
+      });
     }
+    return _value;
   }
 }
