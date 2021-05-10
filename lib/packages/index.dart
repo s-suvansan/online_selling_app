@@ -19,3 +19,4 @@ export 'package:stacked_hooks/stacked_hooks.dart';
 export 'dart:convert';
 export 'package:photo_view/photo_view.dart';
 export 'package:photo_view/photo_view_gallery.dart';
+export 'package:connectivity/connectivity.dart';

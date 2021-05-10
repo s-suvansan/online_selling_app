@@ -1,5 +1,3 @@
-import 'package:connectivity/connectivity.dart';
-
 import '../../main_index.dart';
 
 class SplashViewModel extends BaseViewModel {

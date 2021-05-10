@@ -22,11 +22,28 @@ class _Body extends ViewModelWidget<SplashViewModel> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         !model.isNoInternet
-            ? Container(
-                child: Image.asset(
-                  APP_LOGO,
-                  height: 120,
-                  width: 120,
+            ? Expanded(
+                child: Container(
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Image.asset(
+                          APP_LOGO,
+                          height: 120,
+                          width: 120,
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Image.asset(
+                          APP_NAME,
+                          // width: 180,
+                          height: 45,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
             : _NoInternet(),

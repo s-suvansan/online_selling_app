@@ -317,9 +317,27 @@ class App {
     return CachedNetworkImage(
       imageUrl: url,
       fit: fit,
-      // placeholder: (context, url) => CircularProgressIndicator(),
-      errorWidget: (context, url, error) => Icon(Icons.error),
+      errorWidget: (context, url, error) => Container(
+        color: BrandColors.brandColorLight.withOpacity(0.5),
+        child: Center(child: svgImage(svg: BROKEN_IMAGE, height: 50.0, width: 50.0)),
+      ),
     );
+  }
+
+  // connection check
+  static Future<bool> checkConnection(BuildContext context) async {
+    bool _value = false;
+    ConnectivityResult result = await Connectivity().checkConnectivity();
+    if (result == ConnectivityResult.none) {
+      showInfoBar(
+        context,
+        msg: "${getIt<LanguageChange>().lang.noNetConnection}",
+        bgColor: BrandColors.dangers,
+      );
+    } else {
+      _value = true;
+    }
+    return _value;
   }
 }
 

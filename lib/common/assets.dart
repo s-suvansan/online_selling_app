@@ -16,6 +16,7 @@ const EMPTY_BOX = 'assets/images/svgs/empty_box.svg';
 const EMPTY_MAN = 'assets/images/svgs/empty_man.svg';
 const ON = 'assets/images/svgs/on.svg';
 const OFF = 'assets/images/svgs/off.svg';
+const BROKEN_IMAGE = 'assets/images/svgs/broken_photo.svg';
 
 //place holder image
 const NO_IMAGE =
@@ -27,6 +28,7 @@ const NO_INRETNET = 'assets/images/pngs/no_internet.png';
 
 // app logo png
 const APP_LOGO = 'assets/images/pngs/app_logo.png';
+const APP_NAME = 'assets/images/pngs/app_name.png';
 
 //jpgs
 const DARK_BG = 'assets/images/jpgs/dark_bg.jpg';

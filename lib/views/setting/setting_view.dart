@@ -107,8 +107,10 @@ class _ThemeBox extends ViewModelWidget<SettingViewModel> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: RadialGradient(colors: [
-                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.candleLight.withOpacity(0.5),
-                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.candleLight.withOpacity(0.2),
+                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.brandColorDark.withOpacity(0.8),
+                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.brandColor.withOpacity(0.6),
+                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.candleLight.withOpacity(0.4),
+                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.brandColorLight.withOpacity(0.1),
                     ])),
               ),
             ),
@@ -121,7 +123,7 @@ class _ThemeBox extends ViewModelWidget<SettingViewModel> {
                 height: 50.0,
                 width: 50.0,
                 child: GestureDetector(
-                  onTap: () => model.onClick(),
+                  onTap: () => model.onThemeChange(),
                   child: App.svgImage(
                     svg: getIt<ThemeChange>().isDark ? OFF : ON,
                   ),
@@ -147,11 +149,11 @@ class _LanguageBox extends ViewModelWidget<SettingViewModel> {
           children: [
             _chip(
               lang: "தமிழ்",
-              onTap: () => model.onLangClick(languageCode: Lang.Tamil.code),
+              onTap: () => model.onLanguageChange(context, languageCode: Lang.Tamil.code),
               languageCode: Lang.Tamil.code,
             ),
             _chip(
-              onTap: () => model.onLangClick(languageCode: Lang.English.code),
+              onTap: () => model.onLanguageChange(context, languageCode: Lang.English.code),
               languageCode: Lang.English.code,
             ),
             // _chip(

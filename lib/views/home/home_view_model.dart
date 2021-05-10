@@ -30,7 +30,11 @@ class HomeViewModel extends BaseViewModel {
 
   // open product info view
   void openProductInfo(BuildContext context, Widget widget) {
-    App.showBottomPopup(context, widget, reduceHeightBy: 25.0);
+    App.checkConnection(context).then((value) {
+      if (value) {
+        App.showBottomPopup(context, widget, reduceHeightBy: 25.0);
+      }
+    });
   }
 
   bool handleScrollNotification(ScrollNotification notification) {

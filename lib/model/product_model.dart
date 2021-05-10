@@ -51,23 +51,3 @@ class ProductModel {
         "isNegotiable": isNegotiable,
       };
 }
-
-class FavoriteModel {
-  FavoriteModel({
-    this.id,
-    this.time,
-  });
-
-  String id;
-  Timestamp time;
-
-  factory FavoriteModel.fromJson(Map<dynamic, dynamic> json) => FavoriteModel(
-        id: json["id"] ?? "",
-        time: json["time"] ?? Timestamp.now(),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "time": time ?? Timestamp.now(),
-      };
-}

@@ -60,7 +60,7 @@ class _TopImagesView extends ViewModelWidget<ProductInfoViewModel> {
               itemCount: model.product.imageUrl?.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: () => model.openFullImageView(context),
+                  onTap: () => model.openFullImageView(context, index: index),
                   child: App.cacheImage(
                     model.product.imageUrl[index],
                     fit: BoxFit.contain,
@@ -113,32 +113,33 @@ class _TopImagesView extends ViewModelWidget<ProductInfoViewModel> {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: BrandColors.dark.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  alignment: Alignment.center,
-                  width: 80.0,
-                  height: 20.0,
-                  child: ListView.separated(
-                    physics: ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: model.product.imageUrl.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, dotIndex) => Container(
-                      height: 10.0,
-                      width: 10.0,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: dotIndex == model.currentImageIndex ? BrandColors.brandColorLight : BrandColors.light,
-                      ),
+            if (model.product.imageUrl.isNotEmpty)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                    decoration: BoxDecoration(
+                      color: BrandColors.dark.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(16.0),
                     ),
-                    separatorBuilder: (context, i) => SizedBox(width: 4.0),
-                  )),
-            ),
+                    alignment: Alignment.center,
+                    width: 80.0,
+                    height: 20.0,
+                    child: ListView.separated(
+                      physics: ClampingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: model.product.imageUrl.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, dotIndex) => Container(
+                        height: 10.0,
+                        width: 10.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: dotIndex == model.currentImageIndex ? BrandColors.brandColorLight : BrandColors.light,
+                        ),
+                      ),
+                      separatorBuilder: (context, i) => SizedBox(width: 4.0),
+                    )),
+              ),
           ],
         ));
   }

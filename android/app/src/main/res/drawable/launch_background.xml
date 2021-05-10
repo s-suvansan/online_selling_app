@@ -14,9 +14,16 @@
 <!--            />-->
 <!--    </item>-->
     <!-- You can insert your own image assets here -->
-     <item
+    <item
          android:width="120dp" android:height="120dp"
          android:drawable="@drawable/app_logo"
          android:gravity="center"/>
+    <item
+          android:height="45dp"
+          android:width="165dp"
+         android:drawable="@drawable/app_name"
+         android:gravity="bottom|center_horizontal"/>
+         <!-- android:width="195dp" -->
+         <!-- 65 : 16 -->
 
 </layer-list>

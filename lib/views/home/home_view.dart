@@ -105,7 +105,8 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
                       model.product[index].imageUrl.isNotEmpty &&
                       model.product[index].imageUrl[0] != "")
                   ? model.product[index].imageUrl[0]
-                  : NO_IMAGE,
+                  : ""
+              /* : NO_IMAGE */,
             ),
           ),
           Positioned(

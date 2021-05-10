@@ -24,6 +24,7 @@ class CommonAppBar extends StatefulWidget {
 
 class _CommonAppBarState extends State<CommonAppBar> {
   bool isLike = false;
+  bool isLoadingLike = true;
   @override
   void initState() {
     super.initState();
@@ -32,11 +33,17 @@ class _CommonAppBarState extends State<CommonAppBar> {
         if (value) {
           setState(() {
             isLike = true;
+            isLoadingLike = false;
+          });
+        } else {
+          setState(() {
+            isLoadingLike = false;
           });
         }
       }).catchError((e) {
         setState(() {
           isLike = false;
+          isLoadingLike = false;
         });
       });
     }
@@ -73,7 +80,11 @@ class _CommonAppBarState extends State<CommonAppBar> {
             right: 8.0,
             child: InkWell(
               onTap: () => setLike(),
-              child: App.svgImage(svg: isLike ? LIKE_FILL : LIKE, height: 24.0, color: BrandColors.brandColorDark),
+              child: AnimatedOpacity(
+                duration: Duration(milliseconds: 500),
+                opacity: isLoadingLike ? 0.0 : 1.0,
+                child: App.svgImage(svg: isLike ? LIKE_FILL : LIKE, height: 24.0, color: BrandColors.brandColorDark),
+              ),
             ),
           ),
       ],
@@ -81,10 +92,14 @@ class _CommonAppBarState extends State<CommonAppBar> {
   }
 
   void setLike() {
+    setState(() {
+      isLoadingLike = true;
+    });
     setLikeFirestore().then((value) {
       if (value) {
         setState(() {
           isLike = !isLike;
+          isLoadingLike = false;
         });
       }
     });
