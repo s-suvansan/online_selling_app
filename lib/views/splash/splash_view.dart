@@ -5,7 +5,7 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SplashViewModel>.nonReactive(
       builder: (context, model, _) => Container(
-        color: BrandColors.light,
+        color: BrandColors.dark,
         child: _Body(),
       ),
       onModelReady: (model) => model.onInit(context),

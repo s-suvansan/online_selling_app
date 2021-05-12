@@ -57,7 +57,7 @@ class ProductInfoViewModel extends BaseViewModel {
       _url = "tel:$phoneNumber";
     } else {
       /* _url = "sms:$phoneNumber";  */ // for sms
-      _url = "whatsapp://send?phone=$phoneNumber";
+      _url = "whatsapp://send?phone=+94$phoneNumber";
     }
     App.urlLaunch(url: _url).then((value) {
       if (!value) {

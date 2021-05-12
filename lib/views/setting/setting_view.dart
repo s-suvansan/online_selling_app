@@ -9,75 +9,122 @@ class SettingView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: App.getDeviceWidth(context) - 100.0,
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    decoration: BoxDecoration(
-                        color: getIt<ThemeChange>().isDark ? BrandColors.dark : BrandColors.light,
-                        borderRadius: BorderRadius.circular(16.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: getIt<ThemeChange>().isDark
-                                ? BrandColors.light.withOpacity(0.2)
-                                : BrandColors.dark.withOpacity(0.2),
-                            spreadRadius: 1.0,
-                            offset: Offset.zero,
-                            blurRadius: 3.0,
-                          ),
-                        ]),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              BrandTexts.titleBold(
-                                text: model.setting,
-                                fontSize: 18.0,
-                                color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
-                              ),
-                              GestureDetector(
-                                onTap: () => App.popOnce(context),
-                                child: Icon(
-                                  Icons.cancel_sharp,
-                                  size: 20.0,
-                                  color: BrandColors.shadowDark,
+                  SingleChildScrollView(
+                    child: Container(
+                      width: App.getDeviceWidth(context) - 100.0,
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      decoration: BoxDecoration(
+                          color: getIt<ThemeChange>().isDark ? BrandColors.dark : BrandColors.light,
+                          borderRadius: BorderRadius.circular(16.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: getIt<ThemeChange>().isDark
+                                  ? BrandColors.light.withOpacity(0.2)
+                                  : BrandColors.dark.withOpacity(0.2),
+                              spreadRadius: 1.0,
+                              offset: Offset.zero,
+                              blurRadius: 3.0,
+                            ),
+                          ]),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                BrandTexts.titleBold(
+                                  text: model.setting,
+                                  fontSize: 18.0,
+                                  color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
                                 ),
+                                GestureDetector(
+                                  onTap: () => App.popOnce(context),
+                                  child: Icon(
+                                    Icons.cancel_sharp,
+                                    size: 20.0,
+                                    color: BrandColors.shadowDark,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          _Loader(),
+                          SizedBox(height: 16.0),
+                          BrandTexts.titleBold(
+                            text: "${getIt<LanguageChange>().lang.changeTheme}",
+                            fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
+                            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                          ),
+                          SizedBox(height: 16.0),
+                          _ThemeBox(),
+                          SizedBox(height: 16.0),
+                          BrandTexts.titleBold(
+                            text: "${getIt<LanguageChange>().lang.selectLang}",
+                            maxLines: 2,
+                            fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
+                            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                          ),
+                          SizedBox(height: 16.0),
+                          _LanguageBox(),
+                          SizedBox(height: 16.0),
+                          BrandTexts.titleBold(
+                            text: "Contact Us",
+                            maxLines: 2,
+                            fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
+                            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                          ),
+                          BrandTexts.caption(
+                            text: "some long text here some long text here some long text here",
+                            maxLines: 2,
+                            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                          ),
+                          SizedBox(height: 8.0),
+                          Wrap(
+                            spacing: 8.0,
+                            runSpacing: 8.0,
+                            children: [
+                              _ContactUs(
+                                text: "Call now",
+                              ),
+                              _ContactUs(
+                                text: "WhatsApp",
+                                isWhatsapp: true,
                               )
                             ],
                           ),
-                        ),
-                        Divider(
-                          height: 0.0,
-                          color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
-                        ),
-                        SizedBox(height: 16.0),
-                        BrandTexts.titleBold(
-                          text: "${getIt<LanguageChange>().lang.changeTheme}",
-                          fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
-                          color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
-                        ),
-                        SizedBox(height: 16.0),
-                        _ThemeBox(),
-                        SizedBox(height: 16.0),
-                        BrandTexts.titleBold(
-                          text: "${getIt<LanguageChange>().lang.selectLang}",
-                          maxLines: 2,
-                          fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
-                          color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
-                        ),
-                        SizedBox(height: 16.0),
-                        _LanguageBox(),
-                        SizedBox(height: 16.0),
-                      ],
+                          SizedBox(height: 16.0),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
         viewModelBuilder: () => SettingViewModel());
+  }
+}
+
+class _Loader extends ViewModelWidget<SettingViewModel> {
+  const _Loader() : super(reactive: true);
+  @override
+  Widget build(BuildContext context, SettingViewModel model) {
+    return Consumer<ThemeChange>(builder: (context, value, child) {
+      return model.isLoading
+          ? SizedBox(
+              height: 1.5,
+              child: LinearProgressIndicator(
+                backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                valueColor: AlwaysStoppedAnimation<Color>(BrandColors.brandColorDark),
+              ),
+            )
+          : Divider(
+              height: 0.0,
+              thickness: 1.5,
+              color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+            );
+    });
   }
 }
 
@@ -172,7 +219,6 @@ class _LanguageBox extends ViewModelWidget<SettingViewModel> {
       return GestureDetector(
         onTap: onTap,
         child: Container(
-          // height: 40.0,
           padding: EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             border: Border.all(
@@ -181,10 +227,35 @@ class _LanguageBox extends ViewModelWidget<SettingViewModel> {
             ),
             borderRadius: BorderRadius.circular(16.0),
           ),
-          // alignment: Alignment.center,
           child: BrandTexts.titleBold(
             text: lang,
             color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadowDark,
+          ),
+        ),
+      );
+    });
+  }
+}
+
+class _ContactUs extends ViewModelWidget<SettingViewModel> {
+  final Function onTap;
+  final String text;
+  final bool isWhatsapp;
+  const _ContactUs({this.text = "", this.onTap, this.isWhatsapp = false}) : super(reactive: false);
+  @override
+  Widget build(BuildContext context, SettingViewModel model) {
+    return Consumer<LanguageChange>(builder: (context, value, child) {
+      return GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+          decoration: BoxDecoration(
+            color: isWhatsapp ? BrandColors.whatsappColor : BrandColors.callColor,
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: BrandTexts.titleBold(
+            text: text,
+            color: BrandColors.light,
           ),
         ),
       );
