@@ -49,29 +49,7 @@ class ProductInfoViewModel extends BaseViewModel {
     }
   }
 
-  // launch call and sms
-  void callAndSmsLauncher(BuildContext context, {@required String phoneNumber, bool isCall = true}) {
-    String _url = "";
-
-    if (isCall) {
-      _url = "tel:$phoneNumber";
-    } else {
-      /* _url = "sms:$phoneNumber";  */ // for sms
-      _url = "whatsapp://send?phone=+94$phoneNumber";
-    }
-    App.urlLaunch(url: _url).then((value) {
-      if (!value) {
-        print("Could not launch $_url");
-        App.showInfoBar(
-          context,
-          msg: "${getIt<LanguageChange>().lang.sorryCouldnotOpen}",
-          bgColor: BrandColors.dangers,
-        );
-      }
-    });
-  }
-
-  // show setting bottom sheet
+  // show phone number list
   void showPhoneNumbers(BuildContext context, {@required List<String> phoneNumber, bool isCall = true}) {
     if (phoneNumber != null && phoneNumber.isNotEmpty) {
       if (phoneNumber.length > 1) {
@@ -83,18 +61,13 @@ class ProductInfoViewModel extends BaseViewModel {
           ),
         ).then((val) {
           if (val != null) {
-            callAndSmsLauncher(context, phoneNumber: val, isCall: isCall);
+            App.callAndSmsLauncher(context, phoneNumber: val, isCall: isCall);
           }
         });
       } else {
-        callAndSmsLauncher(context, phoneNumber: phoneNumber[0], isCall: isCall);
+        App.callAndSmsLauncher(context, phoneNumber: phoneNumber[0], isCall: isCall);
       }
     }
-  }
-
-  // pop with valur
-  void popPhoneNumberList(BuildContext context, {@required String number}) {
-    Navigator.of(context).pop(number);
   }
 
   // for open image full view

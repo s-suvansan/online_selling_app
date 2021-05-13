@@ -13,7 +13,6 @@ class ScrollChange with ChangeNotifier {
   set setIsNotify(bool val) => _isNotify = val;
 
   void increseCount() {
-    // _count++;
     _count += 10;
     if (isNotify) {
       notifyListeners();

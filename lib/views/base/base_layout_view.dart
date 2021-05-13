@@ -18,7 +18,7 @@ class BaseLayoutView extends StatelessWidget {
                 floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
               ),
             ),
-        onModelReady: (model) => model.onInit(),
+        // onModelReady: (model) => model.onInit(),
         viewModelBuilder: () => BaseLayoutViewModel());
   }
 }

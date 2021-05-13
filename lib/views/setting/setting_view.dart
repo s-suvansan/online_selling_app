@@ -14,7 +14,7 @@ class SettingView extends StatelessWidget {
                       width: App.getDeviceWidth(context) - 100.0,
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
                       decoration: BoxDecoration(
-                          color: getIt<ThemeChange>().isDark ? BrandColors.dark : BrandColors.light,
+                          color: getIt<ThemeChange>().isDark ? BrandColors.dark3 : BrandColors.light,
                           borderRadius: BorderRadius.circular(16.0),
                           boxShadow: [
                             BoxShadow(
@@ -70,27 +70,39 @@ class SettingView extends StatelessWidget {
                           _LanguageBox(),
                           SizedBox(height: 16.0),
                           BrandTexts.titleBold(
-                            text: "Contact Us",
+                            text: "${getIt<LanguageChange>().lang.contactUs}",
                             maxLines: 2,
                             fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
                             color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
                           ),
+                          SizedBox(height: 4.0),
                           BrandTexts.caption(
-                            text: "some long text here some long text here some long text here",
-                            maxLines: 2,
+                            text: "${getIt<LanguageChange>().lang.contactUsDesc}",
+                            maxLines: 4,
+                            textAlign: TextAlign.justify,
+                            fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 12.0 : 10.0,
                             color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
                           ),
-                          SizedBox(height: 8.0),
+                          SizedBox(height: 16.0),
                           Wrap(
                             spacing: 8.0,
                             runSpacing: 8.0,
                             children: [
                               _ContactUs(
-                                text: "Call now",
+                                svg: CALL,
+                                onTap: () => model.showPhoneNumbers(
+                                  context,
+                                  phoneNumber: Global.phoneNumberModel.normal,
+                                ),
                               ),
                               _ContactUs(
-                                text: "WhatsApp",
+                                svg: WHATSAPP,
                                 isWhatsapp: true,
+                                onTap: () => model.showPhoneNumbers(
+                                  context,
+                                  isCall: false,
+                                  phoneNumber: Global.phoneNumberModel.whatsApp,
+                                ),
                               )
                             ],
                           ),
@@ -200,14 +212,14 @@ class _LanguageBox extends ViewModelWidget<SettingViewModel> {
               languageCode: Lang.Tamil.code,
             ),
             _chip(
+              lang: "எங்கட தமிழ்",
+              onTap: () => model.onLanguageChange(context, languageCode: Lang.OurTamil.code),
+              languageCode: Lang.OurTamil.code,
+            ),
+            _chip(
               onTap: () => model.onLanguageChange(context, languageCode: Lang.English.code),
               languageCode: Lang.English.code,
             ),
-            // _chip(
-            //   lang: "தமிழ்",
-            // onTap: () => model.onLangClick(languageCode: Lang.Tamil.code),
-            // languageCode: Lang.Tamil.code,
-            // ),
           ],
         ),
       );
@@ -239,24 +251,25 @@ class _LanguageBox extends ViewModelWidget<SettingViewModel> {
 
 class _ContactUs extends ViewModelWidget<SettingViewModel> {
   final Function onTap;
-  final String text;
+  final String svg;
   final bool isWhatsapp;
-  const _ContactUs({this.text = "", this.onTap, this.isWhatsapp = false}) : super(reactive: false);
+  const _ContactUs({this.svg = "", this.onTap, this.isWhatsapp = false}) : super(reactive: false);
   @override
   Widget build(BuildContext context, SettingViewModel model) {
     return Consumer<LanguageChange>(builder: (context, value, child) {
       return GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+          height: 40.0,
+          width: 40.0,
+          // padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          alignment: Alignment.center,
           decoration: BoxDecoration(
+            shape: BoxShape.circle,
             color: isWhatsapp ? BrandColors.whatsappColor : BrandColors.callColor,
-            borderRadius: BorderRadius.circular(16.0),
+            // borderRadius: BorderRadius.circular(16.0),
           ),
-          child: BrandTexts.titleBold(
-            text: text,
-            color: BrandColors.light,
-          ),
+          child: App.svgImage(svg: svg, height: isWhatsapp ? 18.0 : 16.0, color: BrandColors.light),
         ),
       );
     });

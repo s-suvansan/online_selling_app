@@ -15,6 +15,7 @@ class Global {
   static const String LANGUAGE = "languages";
   static const String TAMIL = "tamil";
   static const String ENGLISH = "english";
+  static const String OUR_TAMIL = "our_tamil";
 
   //phone number related
   static const String PHONE_NUMBER = "phoneNumbers";

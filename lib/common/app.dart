@@ -339,6 +339,28 @@ class App {
     }
     return _value;
   }
+
+  // launch call and sms
+  static void callAndSmsLauncher(BuildContext context, {@required String phoneNumber, bool isCall = true}) {
+    String _url = "";
+
+    if (isCall) {
+      _url = "tel:$phoneNumber";
+    } else {
+      /* _url = "sms:$phoneNumber";  */ // for sms
+      _url = "whatsapp://send?phone=+94$phoneNumber";
+    }
+    App.urlLaunch(url: _url).then((value) {
+      if (!value) {
+        print("Could not launch $_url");
+        App.showInfoBar(
+          context,
+          msg: "${getIt<LanguageChange>().lang.sorryCouldnotOpen}",
+          bgColor: BrandColors.dangers,
+        );
+      }
+    });
+  }
 }
 
 enum DateTimeFormat {
@@ -358,10 +380,7 @@ enum TimeFormat {
 }
 
 // language code enum
-enum Lang {
-  English,
-  Tamil,
-}
+enum Lang { English, Tamil, OurTamil }
 
 extension LangEnumExtenstion on Lang {
   String get code {
@@ -370,6 +389,8 @@ extension LangEnumExtenstion on Lang {
         return "en";
       case Lang.Tamil:
         return "ta";
+      case Lang.OurTamil:
+        return "our_ta";
       default:
         return "en";
     }

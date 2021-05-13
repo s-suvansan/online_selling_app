@@ -31,9 +31,9 @@ class BaseLayoutViewModel extends BaseViewModel {
   set setContoller(AnimationController val) => _hide = val;
 
   // init function
-  onInit() {
-    // _hide = AnimationController(duration: kThemeAnimationDuration, vsync: null);
-  }
+  // onInit() {
+  // _hide = AnimationController(duration: kThemeAnimationDuration, vsync: null);
+  // }
 
   void chageTaps(int index, {BuildContext context}) {
     if (index != 2) {
@@ -75,11 +75,13 @@ class BaseLayoutViewModel extends BaseViewModel {
             break;
           case ScrollDirection.idle:
             // print("stable");
-            if (userScroll.metrics.atEdge && userScroll.metrics.pixels == userScroll.metrics.maxScrollExtent) {
+            if (userScroll.metrics.atEdge &&
+                userScroll.metrics.pixels == userScroll.metrics.maxScrollExtent &&
+                getIt<ScrollChange>().isNotify) {
               print("at the bottom");
               getIt<ScrollChange>().increseCount();
             }
-            // _hide.forward();
+            _hide.forward();
             break;
         }
       }

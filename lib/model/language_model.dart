@@ -37,6 +37,9 @@ class LanguageModel {
     //setting view
     this.changeTheme = "Change Theme",
     this.selectLang = "Select Language",
+    this.contactUs = "Contact Us",
+    this.contactUsDesc = "Sell your products with this app and contact us for more information.",
+    //common
     this.selectNumber = "Select a number",
   });
   //base layout view
@@ -70,7 +73,6 @@ class LanguageModel {
   String call;
   String whatsapp;
   String sorryCouldnotOpen;
-  String selectNumber;
 
   //splash view
   String noNetConnection;
@@ -78,6 +80,10 @@ class LanguageModel {
   //setting view
   String changeTheme;
   String selectLang;
+  String contactUs;
+  String contactUsDesc;
+  //common
+  String selectNumber;
 
   factory LanguageModel.fromJson(Map<String, dynamic> json) => LanguageModel(
         //base layout view
@@ -111,13 +117,16 @@ class LanguageModel {
         call: json["call"] ?? "Call",
         whatsapp: json["whatsapp"] ?? "WhatsApp",
         sorryCouldnotOpen: json["sorryCouldnotOpen"] ?? "Sorry, could not open.",
-        selectNumber: json["selectNumber"] ?? "Select a number",
         //splash view
         noNetConnection: json["noNetConnection"] ?? "No Internet Connection.",
         retry: json["retry"] ?? "Retry",
         //setting view
         changeTheme: json["changeTheme"] ?? "Change Theme",
         selectLang: json["selectLang"] ?? "Select Language",
+        contactUs: json["contactUs"] ?? "Contact Us",
+        contactUsDesc: json["contactUsDesc"] ?? "Sell your products with this app and contact us for more information.",
+        //common
+        selectNumber: json["selectNumber"] ?? "Select a number",
       );
 
   Map<String, dynamic> toJson() => {
@@ -149,10 +158,11 @@ class LanguageModel {
         "call": call,
         "whatsapp": whatsapp,
         "sorryCouldnotOpen": sorryCouldnotOpen,
-        "selectNumber": selectNumber,
         "noNetConnection": noNetConnection,
         "retry": retry,
         "changeTheme": changeTheme,
         "selectLang": selectLang,
+        "contactUs": contactUs,
+        "selectNumber": selectNumber,
       };
 }

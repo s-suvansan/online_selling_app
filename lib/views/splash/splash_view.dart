@@ -4,10 +4,7 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SplashViewModel>.nonReactive(
-      builder: (context, model, _) => Container(
-        color: BrandColors.dark,
-        child: _Body(),
-      ),
+      builder: (context, model, _) => _Body(),
       onModelReady: (model) => model.onInit(context),
       viewModelBuilder: () => SplashViewModel(),
     );
@@ -18,36 +15,39 @@ class SplashView extends StatelessWidget {
 class _Body extends ViewModelWidget<SplashViewModel> {
   @override
   Widget build(BuildContext context, SplashViewModel model) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        !model.isNoInternet
-            ? Expanded(
-                child: Container(
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          APP_LOGO,
-                          height: 120,
-                          width: 120,
+    return Container(
+      color: !model.isNoInternet ? BrandColors.dark : BrandColors.light,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          !model.isNoInternet
+              ? Expanded(
+                  child: Container(
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            APP_LOGO,
+                            height: 120,
+                            width: 120,
+                          ),
                         ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Image.asset(
-                          APP_NAME,
-                          // width: 180,
-                          height: 45,
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Image.asset(
+                            APP_NAME,
+                            // width: 180,
+                            height: 45,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              )
-            : _NoInternet(),
-      ],
+                )
+              : _NoInternet(),
+        ],
+      ),
     );
   }
 }
