@@ -145,8 +145,14 @@ class _BottomBar extends HookViewModelWidget<BaseLayoutViewModel> {
           backgroundColor: getIt<ThemeChange>().isDark
               ? BrandColors.dark2
               : BrandColors.light,
-          selectedFontSize: 12.0,
-          unselectedFontSize: 12.0,
+          selectedFontSize:
+              getIt<LanguageChange>().languageCode == Lang.English.code
+                  ? 12.0
+                  : 10.0,
+          unselectedFontSize:
+              getIt<LanguageChange>().languageCode == Lang.English.code
+                  ? 12.0
+                  : 10.0,
           selectedItemColor: BrandColors.brandColorDark,
           elevation: 10.0,
           unselectedItemColor: getIt<ThemeChange>().isDark
