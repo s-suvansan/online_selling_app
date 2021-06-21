@@ -17,10 +17,14 @@ class PhoneNumberList extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
-              color: getIt<ThemeChange>().isDark ? BrandColors.dark4 : BrandColors.light,
+              color: getIt<ThemeChange>().isDark
+                  ? BrandColors.dark4
+                  : BrandColors.light,
               boxShadow: [
                 BoxShadow(
-                  color: getIt<ThemeChange>().isDark ? BrandColors.light.withOpacity(0.1) : BrandColors.dark.withOpacity(0.1),
+                  color: getIt<ThemeChange>().isDark
+                      ? BrandColors.light.withOpacity(0.1)
+                      : BrandColors.dark.withOpacity(0.1),
                   spreadRadius: 1.0,
                   offset: Offset.zero,
                   blurRadius: 1.0,
@@ -35,9 +39,15 @@ class PhoneNumberList extends StatelessWidget {
                     children: [
                       Expanded(
                         child: BrandTexts.subTitleBold(
-                            text: "${getIt<LanguageChange>().lang.selectNumber}",
-                            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
-                            fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 14.0 : 12.0,
+                            text:
+                                "${getIt<LanguageChange>().lang.selectNumber}",
+                            color: getIt<ThemeChange>().isDark
+                                ? BrandColors.light
+                                : BrandColors.dark,
+                            fontSize: getIt<LanguageChange>().languageCode ==
+                                    Lang.English.code
+                                ? 14.0
+                                : 12.0,
                             maxLines: 2),
                       ),
                       SizedBox(width: 8.0),
@@ -46,21 +56,26 @@ class PhoneNumberList extends StatelessWidget {
                         child: Icon(
                           Icons.cancel_sharp,
                           size: 20.0,
-                          color: BrandColors.shadowDark,
+                          color: getIt<ThemeChange>().isDark
+                              ? BrandColors.light
+                              : BrandColors.shadowDark,
                         ),
                       )
                     ],
                   ),
                 ),
                 Divider(
-                  color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                  color: getIt<ThemeChange>().isDark
+                      ? BrandColors.light
+                      : BrandColors.dark,
                 ),
                 SizedBox(height: 8.0),
                 Column(
                   children: phnNumbers
                       .map(
                         (number) => GestureDetector(
-                          onTap: () => _popPhoneNumberList(context, number: number),
+                          onTap: () =>
+                              _popPhoneNumberList(context, number: number),
                           child: Container(
                             padding: EdgeInsets.symmetric(vertical: 10.0),
                             color: BrandColors.glass,
@@ -70,19 +85,25 @@ class PhoneNumberList extends StatelessWidget {
                                     ? App.svgImage(
                                         svg: CALL,
                                         height: 18.0,
-                                        color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                                        color: getIt<ThemeChange>().isDark
+                                            ? BrandColors.light
+                                            : BrandColors.dark,
                                       )
                                     : App.svgImage(
                                         svg: WHATSAPP,
                                         height: 18.0,
-                                        color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                                        color: getIt<ThemeChange>().isDark
+                                            ? BrandColors.light
+                                            : BrandColors.dark,
                                       ),
                                 SizedBox(
                                   width: 16.0,
                                 ),
                                 BrandTexts.subTitleBold(
                                   text: number,
-                                  color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                                  color: getIt<ThemeChange>().isDark
+                                      ? BrandColors.light
+                                      : BrandColors.dark,
                                 ),
                               ],
                             ),

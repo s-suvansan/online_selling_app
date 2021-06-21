@@ -38,7 +38,8 @@ class LanguageModel {
     this.changeTheme = "Change Theme",
     this.selectLang = "Select Language",
     this.contactUs = "Contact Us",
-    this.contactUsDesc = "Sell your products with this app and contact us for more information.",
+    this.contactUsDesc =
+        "Sell your products with this app and contact us for more information.",
     //common
     this.selectNumber = "Select a number",
   });
@@ -116,7 +117,8 @@ class LanguageModel {
         showLess: json["showLess"] ?? "Show less",
         call: json["call"] ?? "Call",
         whatsapp: json["whatsapp"] ?? "WhatsApp",
-        sorryCouldnotOpen: json["sorryCouldnotOpen"] ?? "Sorry, could not open.",
+        sorryCouldnotOpen:
+            json["sorryCouldnotOpen"] ?? "Sorry, could not open.",
         //splash view
         noNetConnection: json["noNetConnection"] ?? "No Internet Connection.",
         retry: json["retry"] ?? "Retry",
@@ -124,7 +126,8 @@ class LanguageModel {
         changeTheme: json["changeTheme"] ?? "Change Theme",
         selectLang: json["selectLang"] ?? "Select Language",
         contactUs: json["contactUs"] ?? "Contact Us",
-        contactUsDesc: json["contactUsDesc"] ?? "Sell your products with this app and contact us for more information.",
+        contactUsDesc: json["contactUsDesc"] ??
+            "Sell your products with this app and contact us for more information.",
         //common
         selectNumber: json["selectNumber"] ?? "Select a number",
       );
@@ -163,6 +166,7 @@ class LanguageModel {
         "changeTheme": changeTheme,
         "selectLang": selectLang,
         "contactUs": contactUs,
+        "contactUsDesc": contactUsDesc,
         "selectNumber": selectNumber,
       };
 }

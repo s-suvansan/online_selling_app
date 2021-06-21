@@ -14,7 +14,9 @@ class SettingView extends StatelessWidget {
                       width: App.getDeviceWidth(context) - 100.0,
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
                       decoration: BoxDecoration(
-                          color: getIt<ThemeChange>().isDark ? BrandColors.dark3 : BrandColors.light,
+                          color: getIt<ThemeChange>().isDark
+                              ? BrandColors.dark3
+                              : BrandColors.light,
                           borderRadius: BorderRadius.circular(16.0),
                           boxShadow: [
                             BoxShadow(
@@ -37,14 +39,18 @@ class SettingView extends StatelessWidget {
                                 BrandTexts.titleBold(
                                   text: model.setting,
                                   fontSize: 18.0,
-                                  color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                                  color: getIt<ThemeChange>().isDark
+                                      ? BrandColors.light
+                                      : BrandColors.dark,
                                 ),
                                 GestureDetector(
                                   onTap: () => App.popOnce(context),
                                   child: Icon(
                                     Icons.cancel_sharp,
                                     size: 20.0,
-                                    color: BrandColors.shadowDark,
+                                    color: getIt<ThemeChange>().isDark
+                                        ? BrandColors.light
+                                        : BrandColors.dark,
                                   ),
                                 )
                               ],
@@ -54,8 +60,13 @@ class SettingView extends StatelessWidget {
                           SizedBox(height: 16.0),
                           BrandTexts.titleBold(
                             text: "${getIt<LanguageChange>().lang.changeTheme}",
-                            fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
-                            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                            fontSize: getIt<LanguageChange>().languageCode ==
+                                    Lang.English.code
+                                ? 16.0
+                                : 14.0,
+                            color: getIt<ThemeChange>().isDark
+                                ? BrandColors.light
+                                : BrandColors.dark,
                           ),
                           SizedBox(height: 16.0),
                           _ThemeBox(),
@@ -63,8 +74,13 @@ class SettingView extends StatelessWidget {
                           BrandTexts.titleBold(
                             text: "${getIt<LanguageChange>().lang.selectLang}",
                             maxLines: 2,
-                            fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
-                            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                            fontSize: getIt<LanguageChange>().languageCode ==
+                                    Lang.English.code
+                                ? 16.0
+                                : 14.0,
+                            color: getIt<ThemeChange>().isDark
+                                ? BrandColors.light
+                                : BrandColors.dark,
                           ),
                           SizedBox(height: 16.0),
                           _LanguageBox(),
@@ -72,16 +88,27 @@ class SettingView extends StatelessWidget {
                           BrandTexts.titleBold(
                             text: "${getIt<LanguageChange>().lang.contactUs}",
                             maxLines: 2,
-                            fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 16.0 : 14.0,
-                            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                            fontSize: getIt<LanguageChange>().languageCode ==
+                                    Lang.English.code
+                                ? 16.0
+                                : 14.0,
+                            color: getIt<ThemeChange>().isDark
+                                ? BrandColors.light
+                                : BrandColors.dark,
                           ),
                           SizedBox(height: 4.0),
                           BrandTexts.caption(
-                            text: "${getIt<LanguageChange>().lang.contactUsDesc}",
+                            text:
+                                "${getIt<LanguageChange>().lang.contactUsDesc}",
                             maxLines: 4,
                             textAlign: TextAlign.justify,
-                            fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 12.0 : 10.0,
-                            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+                            fontSize: getIt<LanguageChange>().languageCode ==
+                                    Lang.English.code
+                                ? 12.0
+                                : 10.0,
+                            color: getIt<ThemeChange>().isDark
+                                ? BrandColors.light
+                                : BrandColors.dark,
                           ),
                           SizedBox(height: 16.0),
                           Wrap(
@@ -127,14 +154,19 @@ class _Loader extends ViewModelWidget<SettingViewModel> {
           ? SizedBox(
               height: 1.5,
               child: LinearProgressIndicator(
-                backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
-                valueColor: AlwaysStoppedAnimation<Color>(BrandColors.brandColorDark),
+                backgroundColor: getIt<ThemeChange>().isDark
+                    ? BrandColors.light
+                    : BrandColors.dark,
+                valueColor:
+                    AlwaysStoppedAnimation<Color>(BrandColors.brandColorDark),
               ),
             )
           : Divider(
               height: 0.0,
               thickness: 1.5,
-              color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark,
+              color: getIt<ThemeChange>().isDark
+                  ? BrandColors.light
+                  : BrandColors.dark,
             );
     });
   }
@@ -150,7 +182,9 @@ class _ThemeBox extends ViewModelWidget<SettingViewModel> {
         decoration: BoxDecoration(
           border: Border.all(color: BrandColors.shadowDark),
           borderRadius: BorderRadius.circular(16.0),
-          color: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.candleLight.withOpacity(0.2),
+          color: getIt<ThemeChange>().isDark
+              ? BrandColors.dark1
+              : BrandColors.candleLight.withOpacity(0.2),
         ),
         child: Stack(
           fit: StackFit.expand,
@@ -166,10 +200,18 @@ class _ThemeBox extends ViewModelWidget<SettingViewModel> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: RadialGradient(colors: [
-                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.brandColorDark.withOpacity(0.8),
-                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.brandColor.withOpacity(0.6),
-                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.candleLight.withOpacity(0.4),
-                      getIt<ThemeChange>().isDark ? BrandColors.glass : BrandColors.brandColorLight.withOpacity(0.1),
+                      getIt<ThemeChange>().isDark
+                          ? BrandColors.glass
+                          : BrandColors.brandColorDark.withOpacity(0.8),
+                      getIt<ThemeChange>().isDark
+                          ? BrandColors.glass
+                          : BrandColors.brandColor.withOpacity(0.6),
+                      getIt<ThemeChange>().isDark
+                          ? BrandColors.glass
+                          : BrandColors.candleLight.withOpacity(0.4),
+                      getIt<ThemeChange>().isDark
+                          ? BrandColors.glass
+                          : BrandColors.brandColorLight.withOpacity(0.1),
                     ])),
               ),
             ),
@@ -208,16 +250,19 @@ class _LanguageBox extends ViewModelWidget<SettingViewModel> {
           children: [
             _chip(
               lang: "தமிழ்",
-              onTap: () => model.onLanguageChange(context, languageCode: Lang.Tamil.code),
+              onTap: () => model.onLanguageChange(context,
+                  languageCode: Lang.Tamil.code),
               languageCode: Lang.Tamil.code,
             ),
             _chip(
               lang: "எங்கட தமிழ்",
-              onTap: () => model.onLanguageChange(context, languageCode: Lang.OurTamil.code),
+              onTap: () => model.onLanguageChange(context,
+                  languageCode: Lang.OurTamil.code),
               languageCode: Lang.OurTamil.code,
             ),
             _chip(
-              onTap: () => model.onLanguageChange(context, languageCode: Lang.English.code),
+              onTap: () => model.onLanguageChange(context,
+                  languageCode: Lang.English.code),
               languageCode: Lang.English.code,
             ),
           ],
@@ -226,7 +271,8 @@ class _LanguageBox extends ViewModelWidget<SettingViewModel> {
     });
   }
 
-  Widget _chip({String lang = "English", String languageCode = "", Function onTap}) {
+  Widget _chip(
+      {String lang = "English", String languageCode = "", Function onTap}) {
     return Consumer<LanguageChange>(builder: (context, value, child) {
       return GestureDetector(
         onTap: onTap,
@@ -235,13 +281,17 @@ class _LanguageBox extends ViewModelWidget<SettingViewModel> {
           decoration: BoxDecoration(
             border: Border.all(
               width: 2.0,
-              color: getIt<LanguageChange>().languageCode == languageCode ? BrandColors.brandColor : BrandColors.shadow,
+              color: getIt<LanguageChange>().languageCode == languageCode
+                  ? BrandColors.brandColor
+                  : BrandColors.shadow,
             ),
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: BrandTexts.titleBold(
             text: lang,
-            color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadowDark,
+            color: getIt<ThemeChange>().isDark
+                ? BrandColors.light
+                : BrandColors.shadowDark,
           ),
         ),
       );
@@ -253,7 +303,8 @@ class _ContactUs extends ViewModelWidget<SettingViewModel> {
   final Function onTap;
   final String svg;
   final bool isWhatsapp;
-  const _ContactUs({this.svg = "", this.onTap, this.isWhatsapp = false}) : super(reactive: false);
+  const _ContactUs({this.svg = "", this.onTap, this.isWhatsapp = false})
+      : super(reactive: false);
   @override
   Widget build(BuildContext context, SettingViewModel model) {
     return Consumer<LanguageChange>(builder: (context, value, child) {
@@ -266,10 +317,14 @@ class _ContactUs extends ViewModelWidget<SettingViewModel> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isWhatsapp ? BrandColors.whatsappColor : BrandColors.callColor,
+            color:
+                isWhatsapp ? BrandColors.whatsappColor : BrandColors.callColor,
             // borderRadius: BorderRadius.circular(16.0),
           ),
-          child: App.svgImage(svg: svg, height: isWhatsapp ? 18.0 : 16.0, color: BrandColors.light),
+          child: App.svgImage(
+              svg: svg,
+              height: isWhatsapp ? 18.0 : 16.0,
+              color: BrandColors.light),
         ),
       );
     });

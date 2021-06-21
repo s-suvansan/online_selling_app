@@ -51,7 +51,9 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
                                 index: index,
                               ),
                             ),
-                            staggeredTileBuilder: (int index) => StaggeredTile.count(1, index.isEven ? 1.2 : 1.4),
+                            staggeredTileBuilder: (int index) =>
+                                StaggeredTile.count(
+                                    1, index.isEven ? 1.2 : 1.4),
                             crossAxisSpacing: 10.0,
                             mainAxisSpacing: 10.0,
                           ),
@@ -77,7 +79,8 @@ class _ProductGridView extends ViewModelWidget<HomeViewModel> {
 class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
   final int index;
 
-  _ProductGridTile({Key key, @required this.index}) : super(key: key, reactive: true);
+  _ProductGridTile({Key key, @required this.index})
+      : super(key: key, reactive: true);
   @override
   Widget build(BuildContext context, HomeViewModel model) {
     return Container(
@@ -85,7 +88,7 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
       decoration: BoxDecoration(
           color: BrandColors.glass,
           borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
+            Radius.circular(4.0),
           ),
           boxShadow: [
             BoxShadow(
@@ -99,7 +102,7 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
         fit: StackFit.expand,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderRadius: BorderRadius.all(Radius.circular(4.0)),
             child: App.cacheImage(
               (model.product[index].imageUrl != null &&
                       model.product[index].imageUrl.isNotEmpty &&
@@ -122,13 +125,17 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
                         end: Alignment.bottomCenter,
                         stops: [0.1, 0.8],
                         colors: [
-                          getIt<ThemeChange>().isDark ? BrandColors.light.withOpacity(0.2) : BrandColors.dark.withOpacity(0.2),
-                          getIt<ThemeChange>().isDark ? BrandColors.light.withOpacity(0.5) : BrandColors.dark.withOpacity(0.5),
+                          getIt<ThemeChange>().isDark
+                              ? BrandColors.light.withOpacity(0.2)
+                              : BrandColors.dark.withOpacity(0.2),
+                          getIt<ThemeChange>().isDark
+                              ? BrandColors.light.withOpacity(0.5)
+                              : BrandColors.dark.withOpacity(0.5),
                         ],
                       ),
                       borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(8.0),
-                        bottomRight: Radius.circular(8.0),
+                        bottomLeft: Radius.circular(4.0),
+                        bottomRight: Radius.circular(4.0),
                       ),
                       boxShadow: [
                         BoxShadow(
@@ -146,21 +153,31 @@ class _ProductGridTile extends ViewModelWidget<HomeViewModel> {
                       children: [
                         BrandTexts.titleBold(
                           text: model.product[index].title,
-                          color: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
+                          color: getIt<ThemeChange>().isDark
+                              ? BrandColors.dark1
+                              : BrandColors.light,
                           maxLines: 2,
                         ),
                         BrandTexts.subTitleBold(
                           text: "${App.getPrice(model.product[index].price)}",
-                          color: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
+                          color: getIt<ThemeChange>().isDark
+                              ? BrandColors.dark1
+                              : BrandColors.light,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             BrandTexts.caption(
-                              text: "${App.getTime(model.product[index].postAt)}",
-                              color: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
-                              fontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 12.0 : 10.0,
+                              text:
+                                  "${App.getTime(model.product[index].postAt)}",
+                              color: getIt<ThemeChange>().isDark
+                                  ? BrandColors.dark1
+                                  : BrandColors.light,
+                              fontSize: getIt<LanguageChange>().languageCode ==
+                                      Lang.English.code
+                                  ? 12.0
+                                  : 10.0,
                             ),
                           ],
                         ),
