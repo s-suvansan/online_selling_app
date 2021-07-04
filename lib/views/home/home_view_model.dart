@@ -24,8 +24,8 @@ class HomeViewModel extends BaseViewModel {
       } else {
         getIt<ScrollChange>().setIsNotify = true;
       }
-      _isLoading = false;
     }
+    _isLoading = false;
   }
 
   // open product info view
