@@ -148,7 +148,7 @@ class _FavouriteListTile extends ViewModelWidget<BookmarkViewModel> {
                   child: App.cacheImage(
                     (model.product[index].imageUrl != null && model.product[index].imageUrl.isNotEmpty)
                         ? model.product[index].imageUrl[0]
-                        : "",
+                        : NO_IMAGE,
                   ),
                 ),
               ),
