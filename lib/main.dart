@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         BaseLayoutView.routeName: (context) => BaseLayoutView(),
+        ChatView.routeName: (context) => ChatView(),
       },
       home: SplashView(),
       theme: ThemeData(primarySwatch: BrandColors.brandColor),

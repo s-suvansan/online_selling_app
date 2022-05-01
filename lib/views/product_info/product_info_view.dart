@@ -323,7 +323,8 @@ class _BottomCallButton extends ViewModelWidget<ProductInfoViewModel> {
         ),
         Expanded(
           child: InkWell(
-            onTap: () => model.showPhoneNumbers(context, phoneNumber: Global.phoneNumberModel.whatsApp, isCall: false),
+            // onTap: () => model.showPhoneNumbers(context, phoneNumber: Global.phoneNumberModel.whatsApp, isCall: false),
+            onTap: () => model.navigateToChat(context),
             child: Container(
               height: 50.0,
               alignment: Alignment.center,

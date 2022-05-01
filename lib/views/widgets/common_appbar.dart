@@ -57,6 +57,15 @@ class _CommonAppBarState extends State<CommonAppBar> {
           automaticallyImplyLeading: false,
           centerTitle: widget.isCenterTitle,
           backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark1 : BrandColors.light,
+          leading: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () => App.popOnce(context),
+                child: App.svgImage(svg: LEFT_ARROW_SVG, height: 28.0, color: BrandColors.brandColorDark),
+              ),
+            ],
+          ),
           title: BrandTexts.titleBold(
             text: widget.title ?? "",
             color:
@@ -64,15 +73,15 @@ class _CommonAppBarState extends State<CommonAppBar> {
             fontSize: 20.0,
           ),
         ),
-        Positioned(
-          top: 0.0,
-          bottom: 0.0,
-          left: 8.0,
-          child: InkWell(
-            onTap: () => App.popOnce(context),
-            child: App.svgImage(svg: LEFT_ARROW_SVG, height: 24.0, color: BrandColors.brandColorDark),
-          ),
-        ),
+        // Positioned(
+        //   top: 0.0,
+        //   bottom: 0.0,
+        //   left: 8.0,
+        //   child: InkWell(
+        //     onTap: () => App.popOnce(context),
+        //     child: App.svgImage(svg: LEFT_ARROW_SVG, height: 24.0, color: BrandColors.brandColorDark),
+        //   ),
+        // ),
         if (widget.isShowLike)
           Positioned(
             top: 0.0,

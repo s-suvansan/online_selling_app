@@ -81,4 +81,8 @@ class ProductInfoViewModel extends BaseViewModel {
       ),
     );
   }
+
+  void navigateToChat(BuildContext context) {
+    Navigator.pushNamed(context, ChatView.routeName);
+  }
 }
