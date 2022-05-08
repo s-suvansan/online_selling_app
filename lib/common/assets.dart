@@ -33,3 +33,11 @@ const APP_NAME = 'assets/images/pngs/app_name.png';
 //jpgs
 const DARK_BG = 'assets/images/jpgs/dark_bg.jpg';
 const LIGHT_BG = 'assets/images/jpgs/light_bg.jpg';
+
+//svg BG
+const CHAT_BG_1 = 'assets/images/svgs/chat_bg_1.svg';
+const CHAT_BG_2 = 'assets/images/svgs/chat_bg_2.svg';
+const CHAT_BG_3 = 'assets/images/svgs/chat_bg_3.svg';
+const CHAT_BG_4 = 'assets/images/svgs/chat_bg_4.svg';
+const CHAT_BG_5 = 'assets/images/svgs/chat_bg_5.svg';
+const CHAT_BG_6 = 'assets/images/svgs/chat_bg_6.svg';

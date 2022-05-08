@@ -56,12 +56,14 @@ class App {
     Color color,
     double width = 50.0,
     double height = 50.0,
+    BoxFit fit,
   }) {
     return SvgPicture.asset(
       svg,
       color: color,
       width: width,
       height: height,
+      fit: fit ?? BoxFit.contain,
     );
   }
 
