@@ -19,10 +19,10 @@ class ChatViewModel extends BaseViewModel {
   void getChatList(AsyncSnapshot<DocumentSnapshot> snapshot) {
     // print(snapshot);
     try {
-      if (snapshot.hasData && snapshot?.data?.data != null && snapshot.data.data.length >= 0) {
+      if (snapshot.hasData && snapshot?.data?.data() != null && snapshot.data.data().length >= 0) {
         // var data = snapshot.data;
         List<MessageModel> _msgList = [];
-        snapshot.data.data.forEach((key, value) {
+        snapshot.data.data().forEach((key, value) {
           // MessageModel _msg = MessageModel.fromJson(value);
           _msgList.add(MessageModel.fromJson(value));
         });
@@ -64,8 +64,10 @@ class ChatViewModel extends BaseViewModel {
     if (_message != null && _message != "") {
       FireChatService.sentMessage(MessageModel(message: _message)).then((value) {
         if (value) {
-          _isTyping = false;
-          FireChatService.setIsTyping(_isTyping);
+          if (_isTyping) {
+            _isTyping = false;
+            FireChatService.setIsTyping(_isTyping);
+          }
           _message = "";
           _textEditingController.clear();
         }

@@ -3,7 +3,7 @@ import 'main_index.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
+  Firebase.initializeApp();
   setup();
   getIt<ThemeChange>().setIsDark = await App.getIsDark();
   getIt<LanguageChange>().setLanguageCode = await App.getLangCode();

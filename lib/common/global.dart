@@ -11,7 +11,7 @@ class Global {
   static const String CHAT_LIST = "chat_list";
 
   //user details
-  static FirebaseUser userInfo;
+  static User userInfo;
 
   // language firestroe collecton and document name
   static const String LANGUAGE = "languages";

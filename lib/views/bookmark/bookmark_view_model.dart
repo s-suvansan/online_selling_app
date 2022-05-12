@@ -17,8 +17,8 @@ class BookmarkViewModel extends BaseViewModel {
 
   // get product details
   void getProductDetails(AsyncSnapshot<QuerySnapshot> snapshot) {
-    if (snapshot.hasData && snapshot.data.documents.length >= 0) {
-      _product = List<ProductModel>.from(snapshot.data.documents.map((x) => ProductModel.fromJson(x.data)));
+    if (snapshot.hasData && snapshot.data.docs.length >= 0) {
+      _product = List<ProductModel>.from(snapshot.data.docs.map((x) => ProductModel.fromJson(x.data())));
     }
     _isLoading = false;
   }

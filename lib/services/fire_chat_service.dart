@@ -3,17 +3,18 @@ import '../main_index.dart';
 class FireChatService {
   // get chat snapshot for stream build
   static Stream<DocumentSnapshot> getChats() {
-    return Firestore.instance.collection(Global.CHAT_ROOM).document(Global.userInfo.uid).snapshots();
+    // return Firestore.instance.collection(Global.CHAT_ROOM).document(Global.userInfo.uid).snapshots();
+    return FirebaseFirestore.instance.collection(Global.CHAT_ROOM).doc(Global.userInfo.uid).snapshots();
   }
 
   //sent Message
   static Future<bool> sentMessage(MessageModel data) async {
     // Call the user's CollectionReference to add a new user
     try {
-      await Firestore.instance
+      await FirebaseFirestore.instance
           .collection(Global.CHAT_ROOM)
-          .document(Global.userInfo.uid)
-          .setData({"${Timestamp.now().toDate()}": data.toJson()}, merge: true);
+          .doc(Global.userInfo.uid)
+          .set({"${Timestamp.now().toDate()}": data.toJson()}, SetOptions(merge: true) /* merge: true */);
       var _data = data.toJson();
       await setUserChatInfo(
         ChatListModel(
@@ -32,7 +33,7 @@ class FireChatService {
   static Future<bool> setUserChatInfo(ChatListModel data) async {
     // Call the user's CollectionReference to add a new user
     try {
-      await Firestore.instance.collection(Global.CHAT_LIST).document(Global.userInfo.uid).setData(data.toJson());
+      await FirebaseFirestore.instance.collection(Global.CHAT_LIST).doc(Global.userInfo.uid).set(data.toJson());
       return true;
     } catch (e) {
       return false;
@@ -40,11 +41,11 @@ class FireChatService {
   }
 
   static Stream<DocumentSnapshot> getIsTyping() {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection(Global.CHAT_ROOM)
-        .document(Global.userInfo.uid)
+        .doc(Global.userInfo.uid)
         .collection("realtime_typing")
-        .document("typing")
+        .doc("typing")
         .snapshots();
   }
 
@@ -52,12 +53,12 @@ class FireChatService {
   static Future<void> setIsTyping(bool val) async {
     // Call the user's CollectionReference to add a new user
     try {
-      await Firestore.instance
+      await FirebaseFirestore.instance
           .collection(Global.CHAT_ROOM)
-          .document(Global.userInfo.uid)
+          .doc(Global.userInfo.uid)
           .collection("realtime_typing")
-          .document("typing")
-          .setData({"isUserTyping": val}, merge: true);
+          .doc("typing")
+          .set({"isUserTyping": val}, SetOptions(merge: true) /* merge: true */);
       // return true;
     } catch (e) {
       // return false;

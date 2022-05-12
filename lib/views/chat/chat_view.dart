@@ -71,7 +71,7 @@ class _ChatList extends ViewModelWidget<ChatViewModel> {
           return ListView.separated(
               reverse: true,
               physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.fromLTRB(8, 12, 8, 8),
+              padding: EdgeInsets.fromLTRB(8, 2, 8, 8),
               itemBuilder: (context, index) {
                 return _ChatTile(
                   key: UniqueKey(),
@@ -148,7 +148,7 @@ class _ChatDateTile extends ViewModelWidget<ChatViewModel> {
   @override
   Widget build(BuildContext context, ChatViewModel model) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 8.0),
+      padding: EdgeInsets.only(bottom: 6.0, top: 6.0),
       child: Row(
         // mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -189,7 +189,7 @@ class _MessageBox extends ViewModelWidget<ChatViewModel> {
             builder: (context, snapshot) {
               //isTyping
 
-              return (snapshot.hasData && snapshot?.data?.data != null && snapshot.data.data["isAdminTyping"] == true)
+              return (snapshot.hasData && snapshot?.data?.data() != null && snapshot.data.data()["isAdminTyping"] == true)
                   ? Padding(
                       padding: EdgeInsets.fromLTRB(20, 2, 2, 2),
                       child: BrandTexts.commonText(text: "typing...", fontSize: 11.0, maxLines: 8),

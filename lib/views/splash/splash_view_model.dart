@@ -29,18 +29,17 @@ class SplashViewModel extends BaseViewModel {
 
   // check user login or  not
   void checkUserLogin(BuildContext context) {
-    FireAuthService.checkUser().then((value) {
-      if (value.isLogin) {
-        print("user available");
-        Global.userInfo = value.user;
+    UserLogin value = FireAuthService.checkUser();
+    if (value.isLogin) {
+      print("user available");
+      Global.userInfo = value.user;
+      navigateToBaseLayoutView(context);
+    } else {
+      FireAuthService.createUser().then((user) {
+        Global.userInfo = user;
         navigateToBaseLayoutView(context);
-      } else {
-        FireAuthService.createUser().then((user) {
-          Global.userInfo = user;
-          navigateToBaseLayoutView(context);
-        });
-      }
-    });
+      });
+    }
   }
 
   //get phone numbers

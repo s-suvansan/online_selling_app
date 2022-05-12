@@ -7,19 +7,14 @@ class BaseLayoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<BaseLayoutViewModel>.nonReactive(
-        builder: (context, model, child) => SafeArea(
-              child: Scaffold(
-                backgroundColor: getIt<ThemeChange>().isDark
-                    ? BrandColors.dark2
-                    : BrandColors.light,
-                resizeToAvoidBottomInset: false,
-                appBar: _AppBar(),
-                body: _BodyPart(),
-                // bottomNavigationBar: _BottomBar(),
-                floatingActionButton: _BottomBar(),
-                floatingActionButtonLocation:
-                    FloatingActionButtonLocation.centerDocked,
-              ),
+        builder: (context, model, child) => Scaffold(
+              backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
+              resizeToAvoidBottomInset: false,
+              appBar: _AppBar(),
+              body: _BodyPart(),
+              // bottomNavigationBar: _BottomBar(),
+              floatingActionButton: _BottomBar(),
+              floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             ),
         // onModelReady: (model) => model.onInit(),
         viewModelBuilder: () => BaseLayoutViewModel());
@@ -27,8 +22,7 @@ class BaseLayoutView extends StatelessWidget {
 }
 
 //app bar
-class _AppBar extends ViewModelWidget<BaseLayoutViewModel>
-    implements PreferredSizeWidget {
+class _AppBar extends ViewModelWidget<BaseLayoutViewModel> implements PreferredSizeWidget {
   _AppBar() : super(reactive: false);
 
   @override
@@ -37,18 +31,14 @@ class _AppBar extends ViewModelWidget<BaseLayoutViewModel>
       return Consumer<LanguageChange>(builder: (_, __, ___) {
         return AppBar(
           centerTitle: true,
-          backgroundColor: getIt<ThemeChange>().isDark
-              ? BrandColors.dark2
-              : BrandColors.light,
+          backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
           elevation: 0.0,
           title: BrandTexts.commonText(
               text: Global.APP_NAME,
               fontSize: 24.0,
               fontWeight: BrandTexts.black,
               fontFamily: BrandTexts.logoFont,
-              color: getIt<ThemeChange>().isDark
-                  ? BrandColors.light
-                  : BrandColors.dark),
+              color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.dark),
         );
       });
     });
@@ -66,9 +56,7 @@ class _BodyPart extends ViewModelWidget<BaseLayoutViewModel> {
     return Consumer<ThemeChange>(builder: (context, value, child) {
       return Container(
         decoration: BoxDecoration(
-          color: getIt<ThemeChange>().isDark
-              ? BrandColors.dark4
-              : BrandColors.shadowLight.withOpacity(0.9),
+          color: getIt<ThemeChange>().isDark ? BrandColors.dark4 : BrandColors.shadowLight.withOpacity(0.9),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24.0),
             topRight: Radius.circular(24.0),
@@ -112,8 +100,7 @@ class _PageViewPart extends ViewModelWidget<BaseLayoutViewModel> {
 class _ShowHidePart extends ViewModelWidget<BaseLayoutViewModel> {
   final int pageIndex;
   final Widget page;
-  const _ShowHidePart({Key key, this.pageIndex, this.page})
-      : super(key: key, reactive: true);
+  const _ShowHidePart({Key key, this.pageIndex, this.page}) : super(key: key, reactive: true);
   @override
   Widget build(BuildContext context, BaseLayoutViewModel model) {
     return AnimatedOpacity(
@@ -132,8 +119,7 @@ class _BottomBar extends HookViewModelWidget<BaseLayoutViewModel> {
   const _BottomBar({Key key}) : super(key: key, reactive: true);
   @override
   Widget buildViewModelWidget(BuildContext context, BaseLayoutViewModel model) {
-    var _hide = useAnimationController(
-        duration: Duration(milliseconds: 300), initialValue: 1);
+    var _hide = useAnimationController(duration: Duration(milliseconds: 300), initialValue: 1);
     model.setContoller = _hide;
     return Consumer<LanguageChange>(builder: (context, value, child) {
       return SizeTransition(
@@ -142,32 +128,17 @@ class _BottomBar extends HookViewModelWidget<BaseLayoutViewModel> {
         child: BottomNavigationBar(
           currentIndex: model.currentIndex,
           onTap: (int index) => model.chageTaps(index, context: context),
-          backgroundColor: getIt<ThemeChange>().isDark
-              ? BrandColors.dark2
-              : BrandColors.light,
-          selectedFontSize:
-              getIt<LanguageChange>().languageCode == Lang.English.code
-                  ? 12.0
-                  : 10.0,
-          unselectedFontSize:
-              getIt<LanguageChange>().languageCode == Lang.English.code
-                  ? 12.0
-                  : 10.0,
+          backgroundColor: getIt<ThemeChange>().isDark ? BrandColors.dark2 : BrandColors.light,
+          selectedFontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 12.0 : 10.0,
+          unselectedFontSize: getIt<LanguageChange>().languageCode == Lang.English.code ? 12.0 : 10.0,
           selectedItemColor: BrandColors.brandColorDark,
           elevation: 10.0,
-          unselectedItemColor: getIt<ThemeChange>().isDark
-              ? BrandColors.light
-              : BrandColors.shadow,
-          unselectedLabelStyle: TextStyle(
-              color: getIt<ThemeChange>().isDark
-                  ? BrandColors.light
-                  : BrandColors.shadow),
+          unselectedItemColor: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow,
+          unselectedLabelStyle: TextStyle(color: getIt<ThemeChange>().isDark ? BrandColors.light : BrandColors.shadow),
           items: model.bottomTaps.map((taps) {
             return BottomNavigationBarItem(
               icon: App.svgImage(
-                  svg: taps.index == model.currentIndex
-                      ? taps.filledIcon
-                      : taps.icon,
+                  svg: taps.index == model.currentIndex ? taps.filledIcon : taps.icon,
                   color: taps.index == model.currentIndex
                       ? BrandColors.brandColorDark
                       : getIt<ThemeChange>().isDark
